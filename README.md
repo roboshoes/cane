@@ -45,13 +45,21 @@ Goals
 * Play well with other libraries
 
 
-Tests
------
+Development
+-----------
 
-Tests are ran by the [Karma test runner](http://karma-runner.github.io/). To
-start the Karma server, run `karma start tests/config.js`. Then attach all the
-browsers you want to test by navigating to `http://localhost:9876/`. The tests
-will be automatically ran when a file changes.
+Cane.js uses [Grunt](http://gruntjs.com/) to manage the development tasks. Tests
+are ran by the [Karma test runner](http://karma-runner.github.io/). To install
+all the development dependencies run `npm install`.
+
+To start the Karma server, run `grunt` in the root of the repository (you can
+also run `npm start` if you do not have Grunt installed globally). Then attach
+all the browsers you want to test by navigating to `http://localhost:9876/`. The
+tests will be automatically ran when a file changes.
+
+To run the tests once, simply run `npm test` in the root of the repository. You
+must have Chrome and Firefox installed. It will run JSHint on all the files and
+then launch Chrome and Firefox and run all the tests.
 
 
 License
