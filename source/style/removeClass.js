@@ -14,8 +14,7 @@ define( [
 
 			className = node.className;
 
-			if ( className === "" ) names = [];
-			else names = node.className.split( " " );
+			names = ( className === "" ) ? [] : node.className.split( " " );
 
 			for ( i = 0; i < length; i++ ) {
 				index = names.indexOf( classes[ i ] );
@@ -29,6 +28,6 @@ define( [
 
 		} );
 
-	}
+	};
 
 } );

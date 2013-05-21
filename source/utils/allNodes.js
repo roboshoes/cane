@@ -9,7 +9,7 @@ define( [
 		var i, length;
 		var kind = kindOf( array );
 
-		if ( kind != "NodeList" && kind != "Array" ) {
+		if ( kind !== "NodeList" && kind !== "Array" ) {
 			array = [ array ];
 		}
 
@@ -19,6 +19,6 @@ define( [
 			closure( array[ i ] );
 		}
 
-	}
+	};
 
 } );

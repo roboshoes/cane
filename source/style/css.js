@@ -1,13 +1,14 @@
 define( [
 
 	"../utils/allNodes",
-	"mout/lang/kindOf"
+	"mout/lang/kindOf",
+	"mout/object/forOwn"
 
-], function( allNodes, kindOf ) {
+], function( allNodes, kindOf, forOwn ) {
 
 	return function( nodes, object, value ) {
 
-		var key, temp;
+		var temp;
 
 		/*
 		 * converts params to object if passed as key-value-pair of strings.
@@ -22,12 +23,12 @@ define( [
 
 		allNodes( nodes, function( node ) {
 
-			for ( key in object ) {
-				node.style[ key ] = object[ key ];
-			}
+			forOwn( object, function( value, key ) {
+				node.style[ key ] = value;
+			} );
 
 		} );
 
-	}
+	};
 
 } );
