@@ -35,6 +35,15 @@ Goals
 * Play well with others
 
 
+Tests
+-----
+
+Tests are ran by the [Karma test runner](http://karma-runner.github.io/). To
+start the Karma server, run `karma start tests/config.js`. Then attach all the
+browsers you want to test by navigating to `http://localhost:9876/`. The tests
+will be automatically ran when a file changes.
+
+
 License
 -------
 
