@@ -9,13 +9,13 @@ define( [
 		var className, names;
 		var classesToAdd = string.split( " " );
 		var i, length = classesToAdd.length;
+		var currentClass;
 
 		allNodes( nodes, function( node ) {
 
 			className = node.className;
 
-			if ( className === "" ) names = [];
-			else names = node.className.split( " " );
+			names = ( className === "" ) ? [] : node.className.split( " " );
 
 			for ( i = 0; i < length; i++ ) {
 
@@ -31,6 +31,6 @@ define( [
 
 		} );
 
-	}
+	};
 
 } );
