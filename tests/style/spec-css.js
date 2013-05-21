@@ -20,7 +20,7 @@ define( [ "cane/style/css" ], function ( css ) {
 				"overflow": "hidden",
 				"height": "30px",
 				"width": "20px",
-				"line-height": "20px"
+				"lineHeight": "20px"
 			} );
 
 			expect( node.style.overflow ).toBe( "hidden" );

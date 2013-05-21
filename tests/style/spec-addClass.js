@@ -42,9 +42,9 @@ define( [ "cane/style/addClass" ], function ( addClass ) {
 			document.body.appendChild( node1 );
 			document.body.appendChild( node2 );
 
-			var nodes = document.getElementsByTagName( "h1" );
+			var array = document.getElementsByTagName( "h1" );
 
-			addClass( nodes, "one two" );
+			addClass( array, "one two" );
 
 			expect( node1.className ).toBe( "one two" );
 			expect( node2.className ).toBe( "one two" );
