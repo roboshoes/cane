@@ -13,6 +13,7 @@ var options = {
     urlArgs: "cache=" + Date.now(),
     paths: {
         cane: "../source",
+        mout: "../libs/mout"
     }
 };
 

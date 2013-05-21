@@ -1,6 +1,6 @@
 define( [
 
-	"./kindOf"
+	"mout/lang/kindOf"
 
 ], function( kindOf ) {
 

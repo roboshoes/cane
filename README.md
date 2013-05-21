@@ -18,6 +18,12 @@ Important
 This Project is very early in development and at this point more a proof of concept than a full fledged framework.
 
 
+Dependencies
+------------
+
+Cane.js is built upon [mout](http://moutjs.com) which has do be available under the path `mout`.
+
+
 Goals
 -----
 
