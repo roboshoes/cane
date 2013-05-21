@@ -2,7 +2,7 @@
 
     var karma = window.__karma__,
         tests = Object.keys(karma.files).filter(function(f) {
-            return /\/tests\/spec\//.test(f);
+            return /\/tests\/specs\//.test(f);
         });
 
     require({
@@ -10,8 +10,8 @@
         baseUrl: "/base",
 
         paths: {
-            "cane": "source",
-            "mout": "libs/mout"
+            "mout": "node_modules/mout/src",
+            "cane": "source"
         }
     }, tests, karma.start);
 

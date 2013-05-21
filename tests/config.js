@@ -1,19 +1,19 @@
 // Karma configuration
 
-basePath = '..';
+basePath = "..";
 
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  REQUIRE,
-  REQUIRE_ADAPTER,
-  'tests/runner.js',
-  { pattern: 'libs/**/*.js', included: false },
-  { pattern: 'source/**/*.js', included: false },
-  { pattern: 'tests/spec/**/*.js', included: false }
+    JASMINE,
+    JASMINE_ADAPTER,
+    REQUIRE,
+    REQUIRE_ADAPTER,
+    "tests/runner.js",
+    { pattern: "source/**/*.js", included: false },
+    { pattern: "tests/specs/**/*.js", included: false },
+    { pattern: "node_modules/mout/src/**/*.js", included: false }
 ];
 
-reporters = ['progress'];
+reporters = ["progress"];
 
 // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
 logLevel = LOG_INFO;

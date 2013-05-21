@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    src: ['tests/spec/**/*.js']
+                    src: ['tests/specs/**/*.js']
                 }
             },
 
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
             },
 
             tests: {
-                files: ['tests/spec/**/*.js'],
+                files: ['tests/specs/**/*.js'],
                 tasks: ['jshint:tests', 'karma:dev:run']
             },
 
