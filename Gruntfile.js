@@ -52,13 +52,46 @@ module.exports = function(grunt) {
                     src: ['Gruntfile.js']
                 }
             }
+        },
+
+        karma: {
+            test: {
+                configFile: 'tests/config.js',
+                singleRun: true,
+                browsers: ['Chrome', 'Firefox']
+            },
+
+            dev: {
+                configFile: 'tests/config.js',
+                background: true
+            }
+        },
+
+        watch: {
+            source: {
+                files: ['source/**/*.js'],
+                tasks: ['jshint:source', 'karma:dev:run']
+            },
+
+            tests: {
+                files: ['tests/spec/**/*.js'],
+                tasks: ['jshint:tests', 'karma:dev:run']
+            },
+
+            grunt: {
+                files: ['Gruntfile.js'],
+                tasks: ['jshint:grunt']
+            }
         }
     });
 
     [
-        'grunt-contrib-jshint'
+        'grunt-contrib-jshint',
+        'grunt-contrib-watch',
+        'grunt-karma'
     ].forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['karma:dev', 'watch']);
+    grunt.registerTask('test', ['jshint', 'karma:test']);
 
 };
