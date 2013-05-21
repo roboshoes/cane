@@ -1,29 +1,18 @@
+(function() {
 
-// Setup Jasmine for browser
-var env = jasmine.getEnv();
-var reporter = new jasmine.HtmlReporter();
+    var karma = window.__karma__,
+        tests = Object.keys(karma.files).filter(function(f) {
+            return /\/tests\/spec\//.test(f);
+        });
 
-env.addReporter( reporter );
+    require({
+        // Karma serves files from /base
+        baseUrl: "/base",
 
-env.specFilter = function( spec ) {
-    return reporter.specFilter( spec );
-}
+        paths: {
+            "cane": "source",
+            "mout": "libs/mout"
+        }
+    }, tests, karma.start);
 
-var options = {
-    urlArgs: "cache=" + Date.now(),
-    paths: {
-        cane: "../source",
-        mout: "../libs/mout"
-    }
-};
-
-var specs = [
-    "spec/spec-style"
-];
-
-
-// Let's get the party started
-requirejs( options, specs, function() {
-    env.execute();
-} );
-
+}());
