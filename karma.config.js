@@ -1,6 +1,6 @@
 // Karma configuration
 
-basePath = "..";
+basePath = ".";
 
 files = [
     JASMINE,
@@ -9,7 +9,7 @@ files = [
     REQUIRE_ADAPTER,
     "tests/runner.js",
     { pattern: "source/**/*.js", included: false },
-    { pattern: "tests/specs/**/*.js", included: false },
+    { pattern: "tests/**/*.js", included: false },
     { pattern: "node_modules/mout/src/**/*.js", included: false }
 ];
 

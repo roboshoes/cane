@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    src: ['tests/specs/**/*.js']
+                    src: ['tests/**/*.js', '!tests/runner.js']
                 }
             },
 
@@ -56,13 +56,13 @@ module.exports = function(grunt) {
 
         karma: {
             test: {
-                configFile: 'tests/config.js',
+                configFile: 'karma.config.js',
                 singleRun: true,
                 browsers: ['Chrome', 'Firefox']
             },
 
             dev: {
-                configFile: 'tests/config.js',
+                configFile: 'karma.config.js',
                 background: true
             }
         },
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
             },
 
             tests: {
-                files: ['tests/specs/**/*.js'],
+                files: ['tests/**/*.js', '!tests/runner.js'],
                 tasks: ['jshint:tests', 'karma:dev:run']
             },
 

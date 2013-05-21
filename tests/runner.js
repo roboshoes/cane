@@ -2,7 +2,7 @@
 
     var karma = window.__karma__,
         tests = Object.keys(karma.files).filter(function(f) {
-            return /\/tests\/specs\//.test(f);
+            return /\/tests\//.test(f) && !(/\/tests\/runner.js/.test(f));
         });
 
     require({
