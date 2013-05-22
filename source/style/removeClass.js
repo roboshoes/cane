@@ -1,33 +1,24 @@
-define( [
+define([
+    "../utils/allNodes",
+    "mout/array/removeAll",
+    "mout/array/forEach"
+], function(allNodes, removeAll, forEach) {
 
-	"../utils/allNodes"
+    function removeClass(nodes, classes) {
+        classes = classes.split(" ");
 
-], function( allNodes ) {
+        allNodes(nodes, function(node) {
+            var className = node.className,
+                names = (className === "") ? [] : className.split(" ");
 
-	return function( nodes, string ) {
+            forEach(classes, function(oldClass) {
+                removeAll(names, oldClass);
+            });
 
-		var className, names, index;
-		var classes = string.split( " " );
-		var i, length = classes.length;
+            node.className = names.join(" ");
+        });
+    }
 
-		allNodes( nodes, function( node ) {
+    return removeClass;
 
-			className = node.className;
-
-			names = ( className === "" ) ? [] : node.className.split( " " );
-
-			for ( i = 0; i < length; i++ ) {
-				index = names.indexOf( classes[ i ] );
-
-				if ( index > -1 ) {
-					names.splice( index, 1 );
-				}
-			}
-
-			node.className = names.join( " " );
-
-		} );
-
-	};
-
-} );
+});
