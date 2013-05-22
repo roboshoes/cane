@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    src: ["tests/**/*.js", "!tests/runner.js"]
+                    src: ["tests/**/*.js", "karma.config.js"]
                 }
             },
 
