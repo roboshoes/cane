@@ -1,24 +1,25 @@
 define( [
 
-	"mout/lang/kindOf"
+    "mout/lang/kindOf"
 
 ], function( kindOf ) {
 
-	return function( array, closure ) {
+    return function( array, closure ) {
 
-		var i, length;
-		var kind = kindOf( array );
+        var kind = kindOf( array );
 
-		if ( kind !== "NodeList" && kind !== "Array" ) {
-			array = [ array ];
-		}
+        if ( kind !== "NodeList" && kind !== "Array" &&
+             kind !== "HTMLCollection" ) {
 
-		length = array.length;
+            array = [ array ];
+        }
 
-		for ( i = 0; i < length; i++ ) {
-			closure( array[ i ] );
-		}
+        var length = array.length;
 
-	};
+        for ( var i = 0; i < length; i++ ) {
+            closure( array[ i ] );
+        }
+
+    };
 
 } );

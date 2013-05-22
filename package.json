@@ -1,18 +1,19 @@
 {
-  "name": "cane",
-  "private": true,
-  "version": "0.0.0",
+    "name": "cane",
+    "private": true,
+    "version": "0.0.0",
 
-  "scripts": {
-    "start": "grunt",
-    "test": "grunt test"
-  },
+    "scripts": {
+        "start": "grunt",
+        "test": "grunt test"
+    },
 
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.5.3",
-    "grunt-karma": "~0.4.4",
-    "grunt-contrib-watch": "~0.4.3",
-    "grunt-cli": "~0.1.8"
-  }
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.5.3",
+        "grunt-karma": "~0.4.4",
+        "grunt-contrib-watch": "~0.4.3",
+        "grunt-cli": "~0.1.8",
+        "mout": "~0.5.0"
+    }
 }
