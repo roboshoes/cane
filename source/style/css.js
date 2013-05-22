@@ -1,34 +1,22 @@
-define( [
+define([
+    "../utils/allNodes",
+    "mout/object/forOwn"
+], function(allNodes, forOwn) {
 
-	"../utils/allNodes",
-	"mout/lang/kindOf",
-	"mout/object/forOwn"
+    function css(nodes, object, value) {
+        if (typeof object === "string") {
+            var temp = {};
+            temp[object] = value;
+            object = temp;
+        }
 
-], function( allNodes, kindOf, forOwn ) {
+        allNodes(nodes, function(node) {
+            forOwn(object, function(value, key) {
+                node.style[key] = value;
+            });
+        });
+    }
 
-	return function( nodes, object, value ) {
+    return css;
 
-		var temp;
-
-		/*
-		 * converts params to object if passed as key-value-pair of strings.
-		 */
-
-		if ( kindOf( object ) === "String" ) {
-			temp = {};
-			temp[ object ] = value;
-			object = temp;
-		}
-
-
-		allNodes( nodes, function( node ) {
-
-			forOwn( object, function( value, key ) {
-				node.style[ key ] = value;
-			} );
-
-		} );
-
-	};
-
-} );
+});

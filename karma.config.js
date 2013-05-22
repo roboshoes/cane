@@ -1,4 +1,5 @@
 // Karma configuration
+/*jshint undef: false */
 
 basePath = ".";
 

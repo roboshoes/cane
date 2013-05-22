@@ -1,25 +1,19 @@
-define( [
+define([
+    "mout/lang/kindOf",
+    "mout/array/forEach"
+], function(kindOf, forEach) {
 
-    "mout/lang/kindOf"
+    function allNodes(nodes, callback) {
+        var kind = kindOf(nodes);
+        if (kind !== "NodeList" && kind !== "Array" &&
+            kind !== "HTMLCollection") {
 
-], function( kindOf ) {
-
-    return function( array, closure ) {
-
-        var kind = kindOf( array );
-
-        if ( kind !== "NodeList" && kind !== "Array" &&
-             kind !== "HTMLCollection" ) {
-
-            array = [ array ];
+            nodes = [nodes];
         }
 
-        var length = array.length;
+        forEach(nodes, callback);
+    }
 
-        for ( var i = 0; i < length; i++ ) {
-            closure( array[ i ] );
-        }
+    return allNodes;
 
-    };
-
-} );
+});
