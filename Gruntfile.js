@@ -58,7 +58,8 @@ module.exports = function(grunt) {
             test: {
                 configFile: 'karma.config.js',
                 singleRun: true,
-                browsers: ['Chrome', 'Firefox']
+                browsers:
+                    (process.env.KARMA_BROWSERS || "Chrome,Firefox").split(",")
             },
 
             dev: {
