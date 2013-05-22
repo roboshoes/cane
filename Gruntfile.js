@@ -81,6 +81,23 @@ module.exports = function(grunt) {
             grunt: {
                 files: ['Gruntfile.js'],
                 tasks: ['jshint:grunt']
+            },
+
+            docs: {
+                files: ['docs/**/*.md'],
+                tasks: ['docs']
+            }
+        },
+
+        mdoc: {
+            options: {
+                baseTitle: 'Cane',
+                indexContentPath: 'README.md'
+            },
+            docs: {
+                files: {
+                    'docs_html': 'docs'
+                }
             }
         }
     });
@@ -92,6 +109,19 @@ module.exports = function(grunt) {
     ].forEach(grunt.loadNpmTasks);
 
     grunt.registerTask('default', ['karma:dev', 'watch']);
+    grunt.registerTask('docs', ['mdoc']);
     grunt.registerTask('test', ['jshint', 'karma:test']);
+
+    grunt.registerMultiTask('mdoc', function() {
+        var opts = this.options(),
+            mdoc = require('mdoc');
+
+        this.files.forEach(function(file) {
+            opts.inputDir = file.src[0];
+            opts.outputDir = file.dest;
+
+            mdoc.run(opts);
+        });
+    });
 
 };
