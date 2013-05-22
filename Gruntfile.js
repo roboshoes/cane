@@ -14,7 +14,8 @@ module.exports = function(grunt) {
                 undef: true,
                 unused: true,
                 trailing: true,
-                maxlen: 80
+                maxlen: 80,
+                quotmark: "double"
             },
 
             source: {
@@ -23,7 +24,7 @@ module.exports = function(grunt) {
                     globals: { require: false, define: false }
                 },
                 files: {
-                    src: ['source/**/*.js']
+                    src: ["source/**/*.js"]
                 }
             },
 
@@ -40,7 +41,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    src: ['tests/**/*.js', '!tests/runner.js']
+                    src: ["tests/**/*.js", "!tests/runner.js"]
                 }
             },
 
@@ -49,49 +50,49 @@ module.exports = function(grunt) {
                     node: true
                 },
                 files: {
-                    src: ['Gruntfile.js']
+                    src: ["Gruntfile.js"]
                 }
             }
         },
 
         karma: {
             test: {
-                configFile: 'karma.config.js',
+                configFile: "karma.config.js",
                 singleRun: true,
-                browsers: ['Chrome', 'Firefox']
+                browsers: ["Chrome", "Firefox"]
             },
 
             dev: {
-                configFile: 'karma.config.js',
+                configFile: "karma.config.js",
                 background: true
             }
         },
 
         watch: {
             source: {
-                files: ['source/**/*.js'],
-                tasks: ['jshint:source', 'karma:dev:run']
+                files: ["source/**/*.js"],
+                tasks: ["jshint:source", "karma:dev:run"]
             },
 
             tests: {
-                files: ['tests/**/*.js', '!tests/runner.js'],
-                tasks: ['jshint:tests', 'karma:dev:run']
+                files: ["tests/**/*.js", "!tests/runner.js"],
+                tasks: ["jshint:tests", "karma:dev:run"]
             },
 
             grunt: {
-                files: ['Gruntfile.js'],
-                tasks: ['jshint:grunt']
+                files: ["Gruntfile.js"],
+                tasks: ["jshint:grunt"]
             }
         }
     });
 
     [
-        'grunt-contrib-jshint',
-        'grunt-contrib-watch',
-        'grunt-karma'
+        "grunt-contrib-jshint",
+        "grunt-contrib-watch",
+        "grunt-karma"
     ].forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask('default', ['karma:dev', 'watch']);
-    grunt.registerTask('test', ['jshint', 'karma:test']);
+    grunt.registerTask("default", ["karma:dev", "watch"]);
+    grunt.registerTask("test", ["jshint", "karma:test"]);
 
 };
