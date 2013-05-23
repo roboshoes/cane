@@ -1,6 +1,8 @@
 CANE.JS
 =======
 
+[![Build Status](https://travis-ci.org/MathiasPaumgarten/cane.png)](https://travis-ci.org/MathiasPaumgarten/cane)
+
 A modular (AMD based) JavaScript DOM library.
 
 
