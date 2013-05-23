@@ -1,13 +1,10 @@
 define([
-    "mout/lang/kindOf",
-    "mout/array/forEach"
-], function(kindOf, forEach) {
+    "mout/array/forEach",
+    "./isList"
+], function(forEach, isList) {
 
     function allNodes(nodes, callback) {
-        var kind = kindOf(nodes);
-        if (kind !== "NodeList" && kind !== "Array" &&
-            kind !== "HTMLCollection") {
-
+        if (!isList(nodes)) {
             nodes = [nodes];
         }
 
