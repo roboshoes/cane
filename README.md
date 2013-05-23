@@ -63,6 +63,11 @@ To run the tests once, simply run `npm test` in the root of the repository. You
 must have Chrome and Firefox installed. It will run JSHint on all the files and
 then launch Chrome and Firefox and run all the tests.
 
+The documentation is generated from the Markdown files in the `docs` directory.
+To generate the docs run `grunt docs`. The docs are also automatically generated
+when you are running `grunt` (or `npm start`) and a file in the `docs` directory
+changes. The generated HTML files are stored in the `docs_html` directory.
+
 
 License
 -------
