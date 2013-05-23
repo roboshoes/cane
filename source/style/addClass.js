@@ -1,36 +1,24 @@
-define( [
+define([
+    "../utils/allNodes",
+    "mout/array/insert",
+    "mout/array/forEach"
+], function(allNodes, insert, forEach) {
 
-	"../utils/allNodes"
+    function addClass(nodes, classes) {
+        classes = classes.split(" ");
 
-], function( allNodes ) {
+        allNodes(nodes, function(node) {
+            var className = node.className,
+                names = (className === "") ? [] : className.split(" ");
 
-	return function( nodes, string ) {
+            forEach(classes, function(newClass) {
+                insert(names, newClass);
+            });
 
-		var className, names;
-		var classesToAdd = string.split( " " );
-		var i, length = classesToAdd.length;
-		var currentClass;
+            node.className = names.join(" ");
+        });
+    }
 
-		allNodes( nodes, function( node ) {
-
-			className = node.className;
-
-			names = ( className === "" ) ? [] : node.className.split( " " );
-
-			for ( i = 0; i < length; i++ ) {
-
-				currentClass = classesToAdd[ i ];
-
-				if ( names.indexOf( currentClass ) < 0 ) {
-					names.push( currentClass );
-				}
-
-			}
-
-			node.className = names.join( " " );
-
-		} );
-
-	};
-
-} );
+    return addClass;
+    
+});

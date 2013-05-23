@@ -1,59 +1,59 @@
-define( [ "cane/style/addClass" ], function ( addClass ) {
+define(["cane/style/addClass"], function (addClass) {
 
-	describe( "style/addClass()", function () {
+    describe("style/addClass()", function() {
 
-		it( "it should add one ore more classes to an element", function () {
+        it("should add a class to an element", function() {
+            var node = document.createElement("div");
 
-			var node = document.createElement( "div" );
+            addClass(node, "newClass");
 
-			addClass( node, "one" );
+            expect(node.className).toBe("newClass");
+        });
 
-			expect( node.className ).toBe( "one" );
+        it("should add multiple classes to an element", function() {
+            var node = document.createElement("div");
 
-			addClass( node, "two three" );
+            addClass(node, "one two");
 
-			expect( node.className ).toBe( "one two three" );
+            expect(node.className).toBe("one two");
+        });
 
-			addClass( node, "one" );
-			addClass( node, "four" );
+        it("should merge classes with existing classes", function() {
+            var node = document.createElement("div");
+            node.className = "one two";
+            addClass(node, "one three");
 
-			expect( node.className ).toBe( "one two three four" );
+            expect(node.className).toBe("one two three");
+        });
 
-		} );
+        it("should add classes to array of nodes", function() {
+            var node1 = document.createElement("span"),
+                node2 = document.createElement("h1");
 
-		it( "it should add classes to array of nodes", function() {
+            addClass([node1, node2], "one two");
 
-			var node1 = document.createElement( "span" );
-			var node2 = document.createElement( "h1" );
-			var array = [ node1, node2 ];
+            expect(node1.className).toBe("one two");
+            expect(node2.className).toBe("one two");
+        });
 
-			addClass( array, "one two" );
+        it("should add classes to NodeList", function() {
+            var body = document.body,
+                node1 = document.createElement("h1"),
+                node2 = document.createElement("h1");
+                
+            body.appendChild(node1);
+            body.appendChild(node2);
 
-			expect( node1.className ).toBe( "one two" );
-			expect( node2.className ).toBe( "one two" );
+            var list = document.getElementsByTagName("h1");
+            addClass(list, "one two");
 
-		} );
+            expect(node1.className).toBe("one two");
+            expect(node2.className).toBe("one two");
 
-		it( "it should add classes to NodeList of nodes", function() {
+            body.removeChild(node1);
+            body.removeChild(node2);
+        });
 
-			var node1 = document.createElement( "h1" );
-			var node2 = document.createElement( "h1" );
+    });
 
-			document.body.appendChild( node1 );
-			document.body.appendChild( node2 );
-
-			var array = document.getElementsByTagName( "h1" );
-
-			addClass( array, "one two" );
-
-			expect( node1.className ).toBe( "one two" );
-			expect( node2.className ).toBe( "one two" );
-
-			document.body.removeChild( node1 );
-			document.body.removeChild( node2 );
-
-		} );
-
-	} );
-
-} );
+});

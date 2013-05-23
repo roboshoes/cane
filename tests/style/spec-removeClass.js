@@ -1,67 +1,57 @@
-define( [ "cane/style/removeClass" ], function( removeClass ) {
+define(["cane/style/removeClass"], function(removeClass) {
 
-	describe( "style/removeClass()", function() {
+    describe("style/removeClass()", function() {
 
-		it( "it should remove one or more classes from an element", function () {
+        it("should remove a class from an element", function() {
+            var node = document.createElement("div");
+            node.className = "one two";
 
-			var node = document.createElement( "div" );
-			node.className = "one two three four";
+            removeClass(node, "one");
 
-			removeClass( node, "one" );
+            expect(node.className).toBe("two");
+        });
 
-			expect( node.className ).toBe( "two three four" );
+        it("should remove multiple classes from an element", function() {
+            var node = document.createElement("div");
+            node.className = "one two three";
 
-			removeClass( node, "two four" );
+            removeClass(node, "one three");
 
-			expect( node.className ).toBe( "three" );
+            expect(node.className).toBe("two");
+        });
 
-			removeClass( node, "one" );
+        it("should remove classes to array of nodes", function() {
+            var node1 = document.createElement("span"),
+                node2 = document.createElement("h1");
+            node1.className = "one two three";
+            node2.className = "four two three five";
 
-			expect( node.className ).toBe( "three" );
+            removeClass([node1, node2], "three two");
 
-		} );
+            expect(node1.className).toBe("one");
+            expect(node2.className).toBe("four five");
+        });
 
-		it( "it should remove classes to array of nodes", function() {
+        it("should add classes to NodeList", function() {
+            var body = document.body,
+                node1 = document.createElement("h1"),
+                node2 = document.createElement("h1");
+            node1.className = "one two three";
+            node2.className = "four two three five";
+            body.appendChild(node1);
+            body.appendChild(node2);
 
-			var node1 = document.createElement( "span" );
-			node1.className = "one two three";
+            var nodes = document.getElementsByTagName("h1");
 
-			var node2 = document.createElement( "h1" );
-			node2.className = "four two three five";
+            removeClass(nodes, "three two");
 
-			var array = [ node1, node2 ];
+            expect(node1.className).toBe("one");
+            expect(node2.className).toBe("four five");
 
-			removeClass( array, "three two" );
+            body.removeChild(node1);
+            body.removeChild(node2);
+        });
 
-			expect( node1.className ).toBe( "one" );
-			expect( node2.className ).toBe( "four five" );
+    });
 
-		} );
-
-		it( "it should add classes to NodeList of nodes", function() {
-
-			var node1 = document.createElement( "h1" );
-			node1.className = "one two three";
-
-			var node2 = document.createElement( "h1" );
-			node2.className = "four two three five";
-
-			document.body.appendChild( node1 );
-			document.body.appendChild( node2 );
-
-			var nodes = document.getElementsByTagName( "h1" );
-
-			removeClass( nodes, "three two" );
-
-			expect( node1.className ).toBe( "one" );
-			expect( node2.className ).toBe( "four five" );
-
-			document.body.removeChild( node1 );
-			document.body.removeChild( node2 );
-
-		} );
-
-
-	} );
-
-} );
+});
