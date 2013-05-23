@@ -3,7 +3,7 @@
 Utilities for managing CSS styles and classes.
 
 All functions that take DOM nodes as an argument can be used with a single DOM
-node, and array of DOM nodes, or a `NodeList`.
+node, an array of DOM nodes, or a `NodeList`.
 
 
 ## addClass(nodes, string)
