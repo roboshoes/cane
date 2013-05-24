@@ -11,6 +11,7 @@ files = [
     "tests/runner.js",
     { pattern: "source/**/*.js", included: false },
     { pattern: "tests/**/*.js", included: false },
+    { pattern: "tests/resources/**", included: false },
     { pattern: "node_modules/mout/src/**/*.js", included: false }
 ];
 

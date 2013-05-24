@@ -37,7 +37,11 @@ module.exports = function(grunt) {
                         define: false,
                         expect: false,
                         describe: false,
-                        it: false
+                        it: false,
+                        beforeEach: false,
+                        jasmine: false,
+                        runs: false,
+                        waitsFor: false
                     }
                 },
                 files: {
