@@ -1,7 +1,8 @@
 define([
     "../utils/allNodes",
-    "mout/object/forOwn"
-], function(allNodes, forOwn) {
+    "mout/object/forOwn",
+    "mout/string/camelCase"
+], function(allNodes, forOwn, camelCase) {
 
     function css(nodes, object, value) {
         if (typeof object === "string") {
@@ -12,7 +13,7 @@ define([
 
         allNodes(nodes, function(node) {
             forOwn(object, function(value, key) {
-                node.style[key] = value;
+                node.style[camelCase(key)] = value;
             });
         });
     }
