@@ -10,10 +10,17 @@ define([
         return status >= 200 && status < 300 || status === 304;
     }
 
+    function setHeaders(headers, xhr) {
+        forOwn(headers, function(value, key) {
+            xhr.setRequestHeader(key, value);
+        });
+    }
+
     var defaults = {
         url: "",
         method: "GET",
         data: {},
+        headers: {},
         completed: noop,
         success: noop,
         error: noop
@@ -22,13 +29,9 @@ define([
     return function(options) {
 
         options = merge(defaults, options);
+        options.method = options.method.toUpperCase();
 
-        var url = options.url + encode(options.data),
-            xhr = new window.XMLHttpRequest();
-
-        forOwn(options.headers, function(key, value) {
-            xhr.setRequestHeader(key, value);
-        });
+        var xhr = new window.XMLHttpRequest();
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState >= 4) {
@@ -40,8 +43,21 @@ define([
             }
         };
 
-        xhr.open(options.method, url, true);
-        xhr.send("");
+        var data = encode(options.data);
+
+        if (options.method === "GET") {
+
+            xhr.open("GET", options.url + data, true);
+            setHeaders(options.headers, xhr);
+            xhr.send();
+
+        } else {
+
+            xhr.open(options.method, options.url, true);
+            setHeaders(options.headers, xhr);
+            xhr.send( data );
+
+        }
 
         return xhr;
     };
