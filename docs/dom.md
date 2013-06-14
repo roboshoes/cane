@@ -11,3 +11,10 @@ that contains the specified items.
 All arguments will be appended to the `DocumentFragment`. The arguments can be
 DOM nodes or (optionally nested) arrays of DOM nodes. If an argument is an
 array, all DOM nodes in the array will be added to the `DocumentFragment`.
+
+
+## prepend(parent, items...)
+
+Prepends `items` to the `parent` nodes.
+
+Each `items` argument can be a node or an array of nodes to prepend to `parent`.
