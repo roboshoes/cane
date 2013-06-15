@@ -3,6 +3,13 @@
 Utilities for modifying and creating DOM structures.
 
 
+## append(parent, items...)
+
+Appends all the nodes in `items` to the `parent` node.
+
+Each `items` argument can be a node or an array of nodes to append to `parent`.
+
+
 ## fragment(items...)
 
 Creates a [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment)
