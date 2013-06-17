@@ -65,6 +65,7 @@ module.exports = function(grunt) {
 
             dev: {
                 configFile: "karma.config.js",
+                autoWatch: false, // Triggered by watch task
                 background: true
             }
         },
