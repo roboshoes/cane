@@ -4,11 +4,15 @@ define([
 ], function(forEach, isList) {
 
     function allNodes(nodes, callback) {
-        if (!isList(nodes)) {
-            nodes = [nodes];
-        }
+        var iterator = function(item) {
+            if (!isList(item)) {
+                callback(item);
+            } else {
+                forEach(item, iterator);
+            }
+        };
 
-        forEach(nodes, callback);
+        iterator(nodes);
     }
 
     return allNodes;
