@@ -58,19 +58,15 @@ define(["cane/net/request"], function(request) {
 
         });
 
-        describe("additional parameters and headers", function() {
+        describe("request methods and parameters", function() {
+            var server;
 
             beforeEach(function() {
-                this.xhr = sinon.useFakeXMLHttpRequest();
-                var requests = this.requests = [];
-
-                this.xhr.onCreate = function (xhr) {
-                    requests.push(xhr);
-                };
+                server = sinon.fakeServer.create();
             });
 
             afterEach(function() {
-                this.xhr.restore();
+                server.restore();
             });
 
             it("should use POST method", function() {
@@ -79,7 +75,7 @@ define(["cane/net/request"], function(request) {
                     url: "/test"
                 });
 
-                var xhr = this.requests[0];
+                var xhr = server.requests[0];
                 expect(xhr.method).toEqual("POST");
                 expect(xhr.url).toEqual("/test");
             });
@@ -90,7 +86,7 @@ define(["cane/net/request"], function(request) {
                     url: "/test"
                 });
 
-                var xhr = this.requests[0];
+                var xhr = server.requests[0];
                 expect(xhr.method).toEqual("PUT");
                 expect(xhr.url).toEqual("/test");
             });
@@ -105,7 +101,7 @@ define(["cane/net/request"], function(request) {
                     headers: headers
                 });
 
-                var xhr = this.requests[0];
+                var xhr = server.requests[0];
                 expect(xhr.requestHeaders).toEqual(headers);
             });
 
@@ -118,8 +114,73 @@ define(["cane/net/request"], function(request) {
                     data: data
                 });
 
-                var xhr = this.requests[0];
+                var xhr = server.requests[0];
                 expect(xhr.requestBody).toEqual(data);
+            });
+
+        });
+
+        describe("response codes", function() {
+            var server;
+
+            beforeEach(function() {
+                server = sinon.fakeServer.create();
+            });
+
+            afterEach(function() {
+                server.restore();
+            });
+
+            it("should call success on 200 response", function() {
+                var success = sinon.spy();
+
+                request({
+                    url: "/test",
+                    success: success
+                });
+
+                var xhr = server.requests[0];
+                xhr.respond(200, {}, "");
+                expect(success.calledWith("", 200));
+            });
+
+            it("should call success on 304 response", function() {
+                var success = sinon.spy();
+
+                request({
+                    url: "/test",
+                    success: success
+                });
+
+                var xhr = server.requests[0];
+                xhr.respond(304, {}, "");
+                expect(success.calledWith("", 304)).toBe(true);
+            });
+
+            it("should call error on 400 response", function() {
+                var error = sinon.spy();
+
+                request({
+                    url: "/test",
+                    error: error
+                });
+
+                var xhr = server.requests[0];
+                xhr.respond(400, {}, "");
+                expect(error.calledWith("", 400)).toBe(true);
+            });
+
+            it("should call error on 500 response", function() {
+                var error = sinon.spy();
+
+                request({
+                    url: "/test",
+                    error: error
+                });
+
+                var xhr = server.requests[0];
+                xhr.respond(500, {}, "");
+                expect(error.calledWith("", 500)).toBe(true);
             });
 
         });
