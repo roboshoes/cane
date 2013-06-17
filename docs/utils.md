@@ -3,14 +3,15 @@
 Collection of general utilities, mostly used by other functions in the library.
 
 
-## allNodes(nodes, callback)
+## allNodes(nodes, callback, [context])
 
 Handles enumerating over a list of nodes, or handling a single node.
 
 If `nodes` is a list of nodes, it will call `callback` for each item in the
 list, recursing into nested lists. If `nodes` is a single node, it will call
 `callback` with that node. It will pass the current node as the first parameter
-to `callback`.
+to `callback`. If `context` is provided, `this` will be set to `context` in the
+callback.
 
 
 ## isList(value)
