@@ -17,8 +17,9 @@ first parameter.
 Returns true if `value` is a list.
 
 A list is defined as an array,
-[NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList), or
-[HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection).
+[NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList),
+[HTMLCollection](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection),
+or [arguments object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/arguments).
 
 
 ## isNode(value)
