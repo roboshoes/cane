@@ -24,6 +24,11 @@ to change. If it is a string, it is the name of a single CSS property to set to
 the value specified by `value`.
 
 
+## hasClass(nodes, string):Boolean
+
+`string` is a space-separated string that conains the CSS classes to check for.
+
+
 ## removeClass(nodes, string)
 
 Removes a CSS class from the nodes.
