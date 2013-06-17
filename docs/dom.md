@@ -58,3 +58,10 @@ array, all DOM nodes in the array will be added to the `DocumentFragment`.
 Prepends `items` to the `parent` nodes.
 
 Each `items` argument can be a node or an array of nodes to prepend to `parent`.
+
+
+## remove(nodes...)
+
+Removes all `nodes` from their respective parent nodes.
+
+If an node does not have a parent, it is ignored.
