@@ -1,12 +1,40 @@
 {
     "name": "cane",
-    "private": true,
-    "version": "0.0.0",
+    "version": "0.1.0",
+    "description": "Modular DOM library ",
+    "contributors": [
+        {
+            "name": "Conrad Zimmerman",
+            "email": "me@conradz.com"
+        },
+        {
+            "name": "Mathias Paumgarten",
+            "email": "mail@mathias-paumgarten.com"
+        }
+    ],
+
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MathiasPaumgarten/cane/"
+    },
+
+    "bugs": {
+        "url": "https://github.com/MathiasPaumgarten/cane/issues"
+    },
 
     "scripts": {
         "start": "grunt",
         "test": "grunt test"
     },
+
+    "keywords": [
+        "dom",
+        "style",
+        "ajax",
+        "modular"
+    ],
+
+    "license": "MIT",
 
     "devDependencies": {
         "grunt": "~0.4.1",
