@@ -1,8 +1,7 @@
 define([
     "mout/object/merge",
-    "mout/object/forOwn",
-    "mout/queryString/encode"
-], function(merge, forOwn, encode) {
+    "mout/object/forOwn"
+], function(merge, forOwn) {
 
     function noop() {}
 
@@ -10,10 +9,8 @@ define([
         return status >= 200 && status < 300 || status === 304;
     }
 
-    function setHeaders(headers, xhr) {
-        forOwn(headers, function(value, key) {
-            xhr.setRequestHeader(key, value);
-        });
+    function setHeader(value, key) {
+        this.setRequestHeader(key, value);
     }
 
     var defaults = {
@@ -26,8 +23,7 @@ define([
         error: noop
     };
 
-    return function(options) {
-
+    function request(options) {
         options = merge(defaults, options);
         options.method = options.method.toUpperCase();
 
@@ -43,22 +39,13 @@ define([
             }
         };
 
-        var data = encode(options.data);
-
-        if (options.method === "GET") {
-
-            xhr.open("GET", options.url + data, true);
-            setHeaders(options.headers, xhr);
-            xhr.send();
-
-        } else {
-
-            xhr.open(options.method, options.url, true);
-            setHeaders(options.headers, xhr);
-            xhr.send( data );
-
-        }
+        xhr.open(options.method, options.url, true);
+        forOwn(options.headers, setHeader, xhr);
+        xhr.send(options.data);
 
         return xhr;
-    };
+    }
+
+    return request;
+
 });

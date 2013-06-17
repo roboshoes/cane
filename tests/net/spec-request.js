@@ -1,4 +1,4 @@
-define(["cane/net/request", "mout/queryString/decode"], function(request, decode) {
+define(["cane/net/request"], function(request) {
 
     describe("net/request()", function() {
 
@@ -20,11 +20,11 @@ define(["cane/net/request", "mout/queryString/decode"], function(request, decode
                 }
             });
 
-            waitsFor(function(){
+            waitsFor(function() {
                 return completed && success;
             }, "Request never completed", 10000);
 
-            runs(function(){
+            runs(function() {
                 expect(response.text).toBe("Successfully loaded");
                 expect(response.status).toBe(200);
             });
@@ -48,11 +48,11 @@ define(["cane/net/request", "mout/queryString/decode"], function(request, decode
                 }
             });
 
-            waitsFor(function(){
+            waitsFor(function() {
                 return completed && error;
             }, "Request never completed", 10000);
 
-            runs(function(){
+            runs(function() {
                 expect(response.status).toBe(404);
             });
 
@@ -60,7 +60,7 @@ define(["cane/net/request", "mout/queryString/decode"], function(request, decode
 
         describe("additional parameters and headers", function() {
 
-            beforeEach(function(){
+            beforeEach(function() {
                 this.xhr = sinon.useFakeXMLHttpRequest();
                 var requests = this.requests = [];
 
@@ -69,11 +69,33 @@ define(["cane/net/request", "mout/queryString/decode"], function(request, decode
                 };
             });
 
-            afterEach(function(){
+            afterEach(function() {
                 this.xhr.restore();
             });
 
-            it("should add header paramters", function() {
+            it("should use POST method", function() {
+                request({
+                    method: "POST",
+                    url: "/test"
+                });
+
+                var xhr = this.requests[0];
+                expect(xhr.method).toEqual("POST");
+                expect(xhr.url).toEqual("/test");
+            });
+
+            it("should use PUT method", function() {
+                request({
+                    method: "PUT",
+                    url: "/test"
+                });
+
+                var xhr = this.requests[0];
+                expect(xhr.method).toEqual("PUT");
+                expect(xhr.url).toEqual("/test");
+            });
+
+            it("should add header parameters", function() {
                 var headers = {
                     Accept: "text/plain"
                 };
@@ -83,48 +105,21 @@ define(["cane/net/request", "mout/queryString/decode"], function(request, decode
                     headers: headers
                 });
 
-                var xhr = this.requests[ 0 ];
-
+                var xhr = this.requests[0];
                 expect(xhr.requestHeaders).toEqual(headers);
             });
 
-            it("should send additional parameters in GET request", function() {
-
-                var data = {
-                    foo: "hello",
-                    bar: "world"
-                };
+            it("should send data", function() {
+                var data = "test data";
 
                 request({
-                    url: "base/test/resources/test.txt",
+                    method: "POST",
+                    url: "/test",
                     data: data
                 });
 
-                var xhr = this.requests[ 0 ];
-                var parameter = decode( xhr.url.split("?")[1] );
-
-                expect(parameter).toEqual(data);
-                expect(xhr.method).toBe("GET");
-
-            });
-
-            it("should send additional parameters in POST request", function() {
-                var data = {
-                    foo: "hello",
-                    bar: "world"
-                };
-
-                request({
-                    url: "base/test/resources/test.txt",
-                    data: data,
-                    method: "POST"
-                });
-
-                var xhr = this.requests[ 0 ];
-
-                expect(xhr.url).toEqual("base/test/resources/test.txt");
-                expect(xhr.method).toBe("POST");
-                expect(decode(xhr.requestBody)).toEqual(data);
+                var xhr = this.requests[0];
+                expect(xhr.requestBody).toEqual(data);
             });
 
         });
