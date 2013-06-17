@@ -1,16 +1,14 @@
-define(["../utils/isList", "mout/array/forEach"], function(isList, forEach) {
+define([
+    "../utils/allNodes"
+], function(allNodes) {
 
     function add(item) {
-        if (isList(item)) {
-            forEach(item, add, this);
-        } else {
-            this.appendChild(item);
-        }
+        this.appendChild(item);
     }
 
     function fragment() {
         var node = document.createDocumentFragment();
-        forEach(arguments, add, node);
+        allNodes(arguments, add, node);
 
         return node;
     }

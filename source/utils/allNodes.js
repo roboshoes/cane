@@ -3,14 +3,14 @@ define([
     "./isList"
 ], function(forEach, isList) {
 
-    function allNodes(nodes, callback) {
-        var iterator = function(item) {
+    function allNodes(nodes, callback, context) {
+        function iterator(item) {
             if (!isList(item)) {
-                callback(item);
+                callback.call(context, item);
             } else {
                 forEach(item, iterator);
             }
-        };
+        }
 
         iterator(nodes);
     }

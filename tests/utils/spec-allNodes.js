@@ -61,6 +61,23 @@ define(["cane/utils/allNodes"], function(allNodes) {
             ]);
         });
 
+        it("should pass context to callback", function() {
+            var context = {},
+                node = document.createElement("span"),
+                nodes = [
+                    document.createElement("span"),
+                    document.createElement("span")
+                ];
+
+            allNodes(node, function() {
+                expect(this).toBe(context);
+            }, context);
+
+            allNodes(nodes, function() {
+                expect(this).toBe(context);
+            }, context);
+        });
+
     });
 
 });
