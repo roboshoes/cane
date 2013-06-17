@@ -11,6 +11,10 @@ define(["cane/utils/isList"], function(isList) {
             expect(isList([])).toBe(true);
         });
 
+        it("should return true for arguments", function() {
+            expect(isList(arguments)).toBe(true);
+        });
+
         it("should return false for Node", function() {
             var element = document.createElement("div");
             expect(isList(element)).toBe(false);
