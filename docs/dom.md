@@ -53,14 +53,17 @@ DOM nodes or (optionally nested) arrays of DOM nodes. If an argument is an
 array, all DOM nodes in the array will be added to the `DocumentFragment`.
 
 
-## listen(nodes, eventName, callback):Object
+## listen(nodes, eventNames, callback):Object
 
-Adds `callback` as an event listener to all the nodes.
+Adds `callback` as an event listener to all the nodes for the specified events.
 
-`nodes` can be a single DOM node or a list of nodes. `eventName` is the name of
-the event to listen for. `callback` will be called whenever the event is
-triggered on any of the provided nodes. The first argument to `callback` will be
-the `Event` object and the context will be the node that triggered the event.
+`nodes` can be a single DOM node or a list of nodes. `eventNames` is an array or
+space-seperated string that contains the event names that the listener will be
+attached to.
+
+`callback` will be called whenever the event is triggered on any of the provided
+nodes. The first argument to `callback` will be the `Event` object and the
+context will be the node that triggered the event.
 
 The return value is an object that contains a `remove` method that will remove
 the listener that was added. You can also use
@@ -101,12 +104,12 @@ Removes all `nodes` from their respective parent nodes.
 If an node does not have a parent, it is ignored.
 
 
-## removeListener(nodes, eventName, callback)
+## removeListener(nodes, eventNames, callback)
 
-Removes the event listener `callback` from all nodes.
+Removes the event listener `callback` from all nodes for the specified events.
 
-`nodes` can be a single DOM node or a list of nodes. `eventName` is the name of
-the event to remove the listener from. `callback` is the listener function to
-remove.
+`nodes` can be a single DOM node or a list of nodes. `eventNames` is an array or
+space-seperated string containing the names of the events to remove the listener
+from. `callback` is the listener function to remove.
 
 See also: [`listen`](#listen)

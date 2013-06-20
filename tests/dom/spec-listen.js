@@ -34,6 +34,23 @@ define(["cane/dom/listen"], function(listen) {
             expect(callback.calledOn(first)).toBe(true);
         });
 
+        it("should listen on multiple nodes", function() {
+            var el = document.createElement("div"),
+                fooEvent = document.createEvent("Event"),
+                barEvent = document.createEvent("Event"),
+                callback = sinon.spy();
+            fooEvent.initEvent("foo", true, true);
+            barEvent.initEvent("bar", true, true);
+
+            listen(el, "foo bar", callback);
+
+            el.dispatchEvent(fooEvent);
+            expect(callback.calledWith(fooEvent)).toBe(true);
+
+            el.dispatchEvent(barEvent);
+            expect(callback.calledWith(barEvent)).toBe(true);
+        });
+
         it("should return a remove function to remove listener", function() {
             var el = document.createElement("div"),
                 event = document.createEvent("Event"),

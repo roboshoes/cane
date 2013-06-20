@@ -1,16 +1,24 @@
 define([
     "../utils/allNodes",
-    "./removeListener"
-], function(allNodes, removeListener) {
+    "./removeListener",
+    "mout/lang/isArray",
+    "mout/array/forEach"
+], function(allNodes, removeListener, isArray, forEach) {
 
-    function listen(nodes, eventName, callback) {
+    function listen(nodes, eventNames, callback) {
+        if (!isArray(eventNames)) {
+            eventNames = eventNames.split(" ");
+        }
+
         allNodes(nodes, function(node) {
-            node.addEventListener(eventName, callback, false);
+            forEach(eventNames, function(name) {
+                node.addEventListener(name, callback, false);
+            });
         });
 
         return {
             remove: function() {
-                removeListener(nodes, eventName, callback);
+                removeListener(nodes, eventNames, callback);
             }
         };
     }
