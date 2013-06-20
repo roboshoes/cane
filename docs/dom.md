@@ -75,3 +75,12 @@ Each `items` argument can be a node or an array of nodes to prepend to `parent`.
 Removes all `nodes` from their respective parent nodes.
 
 If an node does not have a parent, it is ignored.
+
+
+## removeListener(nodes, eventName, callback)
+
+Removes the event listener `callback` from all nodes.
+
+`nodes` can be a single DOM node or a list of nodes. `eventName` is the name of
+the event to remove the listener from. `callback` is the listener function to
+remove.

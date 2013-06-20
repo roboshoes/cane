@@ -1,0 +1,43 @@
+define(["cane/dom/removeListener"], function(removeListener) {
+
+    describe("dom/removeListener", function() {
+
+        it("should remove event listener", function() {
+            var el = document.createElement("div"),
+                event = document.createEvent("Event"),
+                callback = sinon.spy();
+            event.initEvent("test", true, true);
+
+            el.addEventListener("test", callback, false);
+            removeListener(el, "test", callback);
+            el.dispatchEvent(event);
+
+            expect(callback.called).toBe(false);
+        });
+
+        it("should remove event listener from multiple nodes", function() {
+            var first = document.createElement("div"),
+                second = document.createElement("div"),
+                event = document.createEvent("Event"),
+                callback = sinon.spy();
+            event.initEvent("test", true, true);
+
+            first.addEventListener("test", callback, false);
+            second.addEventListener("test", callback, false);
+            removeListener([first, second], "test", callback);
+            first.dispatchEvent(event);
+            second.dispatchEvent(event);
+
+            expect(callback.called).toBe(false);
+        });
+
+        it("should ignore if listener has not been added", function() {
+            var el = document.createElement("div"),
+                callback = sinon.spy();
+
+            removeListener(el, "test", callback);
+        });
+
+    });
+
+});
