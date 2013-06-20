@@ -1,6 +1,6 @@
-define(["cane/dom/listen"], function(listen) {
+define(["cane/events/listen"], function(listen) {
 
-    describe("dom/listen", function() {
+    describe("events/listen", function() {
 
         it("should add event listener", function() {
             var el = document.createElement("div"),

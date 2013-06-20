@@ -1,6 +1,6 @@
-define(["cane/dom/removeListener"], function(removeListener) {
+define(["cane/events/removeListener"], function(removeListener) {
 
-    describe("dom/removeListener", function() {
+    describe("events/removeListener", function() {
 
         it("should remove event listener", function() {
             var el = document.createElement("div"),
