@@ -53,6 +53,16 @@ DOM nodes or (optionally nested) arrays of DOM nodes. If an argument is an
 array, all DOM nodes in the array will be added to the `DocumentFragment`.
 
 
+## listen(nodes, eventName, callback)
+
+Adds `callback` as an event listener to all the nodes.
+
+`nodes` can be a single DOM node or a list of nodes. `eventName` is the name of
+the event to listen for. `callback` will be called whenever the event is
+triggered on any of the provided nodes. The first argument to `callback` will be
+the `Event` object and the context will be the node that triggered the event.
+
+
 ## prepend(parent, items...)
 
 Prepends `items` to the `parent` nodes.
