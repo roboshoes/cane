@@ -34,6 +34,19 @@ define(["cane/dom/listen"], function(listen) {
             expect(callback.calledOn(first)).toBe(true);
         });
 
+        it("should return a remove function to remove listener", function() {
+            var el = document.createElement("div"),
+                event = document.createEvent("Event"),
+                callback = sinon.spy();
+            event.initEvent("test", true, true);
+
+            var listener = listen(el, "test", callback);
+            listener.remove();
+            el.dispatchEvent(event);
+
+            expect(callback.called).toBe(false);
+        });
+
     });
 
 });
