@@ -141,7 +141,7 @@ define(["cane/net/request"], function(request) {
 
                 var xhr = server.requests[0];
                 xhr.respond(200, {}, "");
-                expect(success.calledWith("", 200));
+                expect(success.calledWith("", 200)).toBe(true);
             });
 
             it("should call success on 304 response", function() {
