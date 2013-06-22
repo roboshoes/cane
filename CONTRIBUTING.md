@@ -25,7 +25,7 @@ open the PR so it can be discussed.
 Develpment
 ----------
 
-Cane.js uses [Grunt](http://gruntjs.com/) to manage the development tasks. Tests
+Cane uses [Grunt](http://gruntjs.com/) to manage the development tasks. Tests
 are ran by the [Karma test runner](http://karma-runner.github.io/). To install
 all the development dependencies run `npm install`.
 

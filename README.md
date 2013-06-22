@@ -1,5 +1,5 @@
-CANE.JS
-=======
+CANE
+====
 
 [![Build Status](https://travis-ci.org/MathiasPaumgarten/cane.png?branch=master)](https://travis-ci.org/MathiasPaumgarten/cane)
 
@@ -20,13 +20,6 @@ your code includes only what you use. Even as more and more developers and
 libraries jump on the band wagon, there is no AMD based alternative for DOM and
 style manipulation. (I may be generalizing here, at least I did not find a
 proper one).
-
-
-Important
----------
-
-This project is very early in development and at this point is more a proof of
-concept than a full fledged framework.
 
 
 Dependencies
@@ -50,7 +43,7 @@ Goals
 Development
 -----------
 
-Cane.js uses [Grunt](http://gruntjs.com/) to manage the development tasks. Tests
+Cane uses [Grunt](http://gruntjs.com/) to manage the development tasks. Tests
 are ran by the [Karma test runner](http://karma-runner.github.io/). To install
 all the development dependencies run `npm install`.
 
