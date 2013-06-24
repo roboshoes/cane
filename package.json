@@ -34,6 +34,10 @@
         "modular"
     ],
 
+    "directories": {
+        "doc": "./docs"
+    },
+
     "license": "MIT",
 
     "devDependencies": {

@@ -66,3 +66,10 @@ License
 -------
 
 Released under the [MIT License](http://opensource.org/licenses/MIT)
+
+
+Authors
+-------
+
+* [@conradz](https://github.com/conradz)
+* [@MathiasPaumgarten](https://github.com/MathiasPaumgarten)
