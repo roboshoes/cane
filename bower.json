@@ -1,6 +1,7 @@
 {
 	"name": "cane",
 	"version": "0.1.0",
+	"description": "Modular DOM library",
 	"main": "source/",
 	"ignore": [
 		"docs",
@@ -10,7 +11,8 @@
 		".travis.yml",
 		"Gruntfile.js",
 		"karma.config.js",
-		"package.json"
+		"package.json",
+		"CONTRIBUTEING.md"
 	],
 	"dependencies": {
 		"mout":"~0.6.0"
