@@ -8,7 +8,7 @@ files = [
     JASMINE_ADAPTER,
     REQUIRE,
     REQUIRE_ADAPTER,
-    "lib/sinon/sinon.js",
+    "node_modules/sinon/pkg/sinon.js",
     "tests/runner.js",
     { pattern: "source/**/*.js", included: false },
     { pattern: "tests/**/*.js", included: false },
