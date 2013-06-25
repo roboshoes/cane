@@ -53,6 +53,14 @@ DOM nodes or (optionally nested) arrays of DOM nodes. If an argument is an
 array, all DOM nodes in the array will be added to the `DocumentFragment`.
 
 
+## matches(selector, items...)
+
+Returns true if all items match the CSS selector.
+
+If any of the items do not match the selector, it will return false. This uses
+the browser's CSS selector matching, so support for some CSS selectors may vary.
+
+
 ## prepend(parent, items...)
 
 Prepends `items` to the `parent` nodes.
