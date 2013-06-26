@@ -73,3 +73,8 @@ Each `items` argument can be a node or an array of nodes to prepend to `parent`.
 Removes all `nodes` from their respective parent nodes.
 
 If an node does not have a parent, it is ignored.
+
+
+## setText(nodes, content)
+
+Set the [`textContent`](https://developer.mozilla.org/en-US/docs/Web/API/Node.textContent) of every node to the given `content`.
