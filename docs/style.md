@@ -14,6 +14,12 @@ Adds a CSS class to the nodes.
 
 If a class is already specified for the node, it will not add a duplicate class.
 
+```js
+var div = document.getElementById("holder");
+
+addClass(holder, "foo bar");
+```
+
 
 ## css(nodes, object, [value])
 
@@ -22,6 +28,18 @@ Sets the specified CSS properties on the nodes.
 `object` can be an object containing the keys and values of the CSS properties
 to change. If it is a string, it is the name of a single CSS property to set to
 the value specified by `value`.
+
+```js
+var elements = document.querySelectorAll(".item");
+
+css(elements, {
+	height: "200px",
+	width: "100px"
+});
+
+
+css(elements, "display", "block");
+```
 
 
 ## hasClass(nodes, string):Boolean
@@ -35,3 +53,12 @@ Removes a CSS class from the nodes.
 
 `string` is a space-separated string that contains the CSS classes to remove
 from the nodes.
+
+```js
+var element = document.createElement("div");
+element.className = "foo bar";
+
+removeClass(element, "foo");
+
+// <div class="bar">
+```

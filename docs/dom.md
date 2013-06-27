@@ -10,6 +10,17 @@ Appends all the nodes in `items` to the `parent` node.
 Each `items` argument can be a node or an array of nodes to append to `parent`.
 
 
+```js
+var parent = document.getElementById("#parent");
+
+var first = document.createElement("div"),
+    second = document.createElement("div");
+
+append(parent, first, second);
+```
+
+
+
 ## create(tag, [attributes,] [content...])
 
 Creates a DOM element and sets the provided attributes and content.
@@ -52,6 +63,12 @@ All arguments will be appended to the `DocumentFragment`. The arguments can be
 DOM nodes or (optionally nested) arrays of DOM nodes. If an argument is an
 array, all DOM nodes in the array will be added to the `DocumentFragment`.
 
+```js
+var element = document.createElement("div");
+
+var f = fragment(element);
+```
+
 
 ## matches(selector, items...)
 
@@ -61,11 +78,21 @@ If any of the items do not match the selector, it will return false. This uses
 the browser's CSS selector matching, so support for some CSS selectors may vary.
 
 
+```js
+var element = document.createElement("div");
+element.className = "foo";
+
+matches("div.foo", element); // returns true
+```
+
+
 ## prepend(parent, items...)
 
 Prepends `items` to the `parent` nodes.
 
 Each `items` argument can be a node or an array of nodes to prepend to `parent`.
+
+See also: [`append`](#append)
 
 
 ## remove(nodes...)
