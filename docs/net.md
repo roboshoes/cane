@@ -8,7 +8,7 @@ Utilities for leoding and handling external resources
 This is a short hand for [`request`](#request). It loads and parses a json file. If loading
 is successful `success` will be called in the context of the `xhr` request and with the parsed
 JSON as argument.
-`error`, if provided, is called when the call fails.
+`error`, if provided, is called when the call either fails or the recieved JSON is not parsable.
 
 See also: [`request`](#request)
 

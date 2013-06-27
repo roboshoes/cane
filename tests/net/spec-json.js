@@ -20,7 +20,7 @@ define(["cane/net/json"], function(json) {
             });
         });
 
-        it("should call error callback", function() {
+        it("should call error callback when resource can't be loaded", function() {
             var completed = false,
                 success = sinon.spy();
 
@@ -29,6 +29,25 @@ define(["cane/net/json"], function(json) {
             }
 
             json("base/tests/resources/wrong.json", success, error);
+
+            waitsFor(function() {
+                return completed;
+            }, "Request never completed", 10000);
+
+            runs(function() {
+                expect(success.called).toBe(false);
+            });
+        });
+
+        it("should call error callback when resource is not valid JSON", function() {
+            var completed = false,
+                success = sinon.spy();
+
+            function error() {
+                completed = true;
+            }
+
+            json("base/tests/resources/invalid.json", success, error);
 
             waitsFor(function() {
                 return completed;

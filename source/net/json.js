@@ -8,8 +8,12 @@ define([
 
         error = error || noop;
 
-        function parse(data) {
-            success.call(this, JSON.parse(data));
+        function parse(data, status) {
+            try {
+                success.call(this, JSON.parse(data));
+            } catch (exception) {
+                error.call(this, data, status);
+            }
         }
 
         request({
