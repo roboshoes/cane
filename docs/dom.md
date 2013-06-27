@@ -58,7 +58,7 @@ create("div", { "class": "test" }, "Hello World!");
 
 Removes all children from `items`.
 
-Each `items` argument can be a node or an array of nodes to append to `parent`.
+Each `items` argument can be a node or an array of nodes.
 
 ## fragment(items...)
 
