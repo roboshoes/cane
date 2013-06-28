@@ -54,6 +54,12 @@ create("div", { "class": "test" }, "Hello World!");
 ```
 
 
+## empty(items...)
+
+Removes all children from `items`.
+
+Each `items` argument can be a node or an array of nodes.
+
 ## fragment(items...)
 
 Creates a [DocumentFragment](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment)
