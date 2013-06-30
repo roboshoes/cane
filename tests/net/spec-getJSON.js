@@ -1,12 +1,12 @@
-define(["cane/net/json"], function(json) {
+define(["cane/net/getJSON"], function(getJSON) {
 
-    describe("net/json", function() {
+    describe("net/getJSON", function() {
 
         it("should call success callback with JSON", function() {
             var completed = false,
                 jsonContent = null;
 
-            json("base/tests/resources/test.json", function(data) {
+            getJSON("base/tests/resources/test.json", function(data) {
                 completed = true;
                 jsonContent = data;
             });
@@ -28,7 +28,7 @@ define(["cane/net/json"], function(json) {
                 completed = true;
             }
 
-            json("base/tests/resources/wrong.json", success, error);
+            getJSON("base/tests/resources/wrong.json", success, error);
 
             waitsFor(function() {
                 return completed;
@@ -47,7 +47,7 @@ define(["cane/net/json"], function(json) {
                 completed = true;
             }
 
-            json("base/tests/resources/invalid.json", success, error);
+            getJSON("base/tests/resources/invalid.json", success, error);
 
             waitsFor(function() {
                 return completed;

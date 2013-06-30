@@ -4,7 +4,7 @@ define([
 
     function noop() {}
 
-    function json(url, success, error) {
+    function getJSON(url, success, error) {
 
         error = error || noop;
 
@@ -26,5 +26,5 @@ define([
         });
     }
 
-    return json;
+    return getJSON;
 });

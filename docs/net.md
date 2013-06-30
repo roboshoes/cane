@@ -3,7 +3,7 @@
 Utilities for leoding and handling external resources
 
 
-## json(url, success, [error])
+## getJSON(url, success, [error])
 
 This is a short hand for [`request`](#request). It loads and parses a json file. If loading
 is successful `success` will be called in the context of the `xhr` request and with the parsed
