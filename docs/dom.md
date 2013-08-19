@@ -20,6 +20,32 @@ append(parent, first, second);
 ```
 
 
+## children(parent)
+
+Returns a real array of the parents child nodes excluding any TextNode or CommentNode.
+Hand written HTML often contains white space and line breaks which are considered seperate nodes
+and returned as such when retrieving all children via `node.childNodes`.
+
+The `parent` argument can be a node or a array of nodes. If an array of nodes is specified all child nodes
+of each parent will be returned within one array.
+
+```html
+<ul id="menu">
+	<!-- this is a comment -->
+	<li>First</li>
+	<li>Second</li>
+        <!-- here is white space -->
+	<li>Third</li>
+</ul>
+```
+
+```js
+var menu = document.getElementById("menu");
+
+children(menu).length // 3;
+menu.childNodes.length // 10;
+```
+
 
 ## create(tag, [attributes,] [content...])
 
