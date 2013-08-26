@@ -23,8 +23,7 @@ append(parent, first, second);
 ## children(parent)
 
 Returns a real array of the parents child nodes excluding any TextNode or CommentNode.
-Hand written HTML often contains white space and line breaks which are considered seperate nodes
-and returned as such when retrieving all children via `node.childNodes`.
+Internally this methods uses `node.children`. Therefore this method can create issues when used in IE < 9.
 
 The `parent` argument can be a node or a array of nodes. If an array of nodes is specified all child nodes
 of each parent will be returned within one array.
@@ -43,7 +42,6 @@ of each parent will be returned within one array.
 var menu = document.getElementById("menu");
 
 children(menu).length // 3;
-menu.childNodes.length // 10;
 ```
 
 
