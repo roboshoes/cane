@@ -11,7 +11,7 @@ Each `items` argument can be a node or an array of nodes to append to `parent`.
 
 
 ```js
-var parent = document.getElementById("#parent");
+var parent = document.getElementById("parent");
 
 var first = document.createElement("div"),
     second = document.createElement("div");
@@ -22,8 +22,8 @@ append(parent, first, second);
 
 ## children(parent)
 
-Returns a real array of the parents child nodes excluding any TextNode or CommentNode.
-Internally this methods uses `node.children`. Therefore this method can create issues when used in IE < 9.
+Returns a real array of the parent's child nodes excluding any `TextNode` or `CommentNode`.
+Internally this methods uses `node.children`.
 
 The `parent` argument can be a node or a array of nodes. If an array of nodes is specified all child nodes
 of each parent will be returned within one array.
