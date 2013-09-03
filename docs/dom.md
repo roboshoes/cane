@@ -11,7 +11,7 @@ Each `items` argument can be a node or an array of nodes to append to `parent`.
 
 
 ```js
-var parent = document.getElementById("#parent");
+var parent = document.getElementById("parent");
 
 var first = document.createElement("div"),
     second = document.createElement("div");
@@ -19,6 +19,30 @@ var first = document.createElement("div"),
 append(parent, first, second);
 ```
 
+
+## children(parent)
+
+Returns a real array of the parent's child nodes excluding any `TextNode` or `CommentNode`.
+Internally this methods uses `node.children`.
+
+The `parent` argument can be a node or a array of nodes. If an array of nodes is specified all child nodes
+of each parent will be returned within one array.
+
+```html
+<ul id="menu">
+	<!-- this is a comment -->
+	<li>First</li>
+	<li>Second</li>
+        <!-- here is white space -->
+	<li>Third</li>
+</ul>
+```
+
+```js
+var menu = document.getElementById("menu");
+
+children(menu).length // 3;
+```
 
 
 ## create(tag, [attributes,] [content...])
