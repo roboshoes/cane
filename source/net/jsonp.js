@@ -3,30 +3,23 @@ define([
     "../dom/append",
     "../dom/remove",
     "mout/queryString/encode",
-    "mout/object/merge"
-], function(create, append, remove, encode, merge) {
+    "mout/object/merge",
+    "mout/array/remove"
+], function(create, append, domRemove, encode, merge, arrayRemove) {
 
-    var usedName = [];
+    var usedNames = [];
 
     function generateName() {
         var timestamp = Date.now();
         var name = "jsonp" + timestamp;
 
-        while (usedName.indexOf(name) > -1) {
+        while (usedNames.indexOf(name) > -1) {
             name = "jsonp" + (++timestamp);
         }
 
-        usedName.push(name);
+        usedNames.push(name);
 
         return name;
-    }
-
-    function freeName(name) {
-        var index = usedName.indexOf( name );
-
-        if ( index > -1 ) {
-            usedName.splice(index, 1);
-        }
     }
 
     function jsonp(url, callback, parameters) {
@@ -40,8 +33,8 @@ define([
         window[callbackName] = function(data) {
             delete window[callbackName];
 
-            freeName(callbackName);
-            remove(script);
+            arrayRemove(usedNames, callbackName);
+            domRemove(script);
 
             callback(data);
         };

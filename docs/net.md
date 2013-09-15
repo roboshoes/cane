@@ -14,11 +14,11 @@ See also: [`request`](#request)
 
 ## jsonp(url, callback, [parameters])
 
-This module helps loading JSON content usen JSON-P methods. For more insight on JSON-P check out: [JSON-P](http://en.wikipedia.org/wiki/JSONP).
+This module helps loading JSON content using JSON-P methods. For more insight on JSON-P check out: [JSON-P](http://en.wikipedia.org/wiki/JSONP).
 
-* `url`: representing the path to the resource to be loaded without parameters.
+* `url`: representing the path to the resource (without parameters).
 * `callback`: Function called with the json from the backend as it's only parameter.
-* `paramters`: Optional set of parameters. The content of this will be url encoded using `mout/queryString/encode`.
+* `parameters`: Optional set of parameters. The content of this will be url encoded using `mout/queryString/encode`.
 
 ```js
 var parameters = {
