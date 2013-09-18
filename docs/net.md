@@ -12,6 +12,25 @@ JSON as argument.
 
 See also: [`request`](#request)
 
+## jsonp(url, [parameters], callback)
+
+This module helps loading JSON content using JSON-P methods. For more insight on JSON-P check out: [JSON-P](http://en.wikipedia.org/wiki/JSONP).
+
+* `url`: representing the path to the resource (without parameters).
+* `parameters`: Optional set of parameters. The content of this will be url encoded using `mout/queryString/encode`.
+* `callback`: Function called with the json from the backend as it's only parameter.
+
+```js
+var parameters = {
+	first_name: "Mathias",
+	last_name: "Paumgarten"
+}
+
+jsonp("http://some.url/api/info", parameters, onComplete);
+
+function onComplete(json) { ... }
+```
+
 ## request(options)
 
 This module is used to send AJAX requests. It takes one object as argument. `options` can
