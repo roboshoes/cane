@@ -2,11 +2,15 @@ define(["cane/net/jsonp"], function(jsonp) {
 
     describe("net/jsonp()", function() {
 
+        var url = window.location.protocol + "//" + window.location.hostname + ":9000/jsonp/";
+        var mirrorURL = url + "mirror";
+        var staticURL = url + "static";
+
         it("should call resource using jsonp", function() {
             var completed = false;
             var content = null;
 
-            jsonp("/express/jsonp/static", function(data) {
+            jsonp(staticURL, function(data) {
                 completed = true;
                 content = data;
             });
@@ -33,7 +37,7 @@ define(["cane/net/jsonp"], function(jsonp) {
                 content = data;
             }
 
-            jsonp("/express/jsonp/mirror", onComplete, parameters);
+            jsonp(mirrorURL, parameters, onComplete);
 
             waitsFor(function() {
                 return completed;
@@ -56,13 +60,13 @@ define(["cane/net/jsonp"], function(jsonp) {
                 };
             }
 
-            jsonp("/express/jsonp/mirror", onComplete(0), { value: "one" });
-            jsonp("/express/jsonp/mirror", onComplete(1), { value: "two" });
-            jsonp("/express/jsonp/mirror", onComplete(2), { value: "three" });
+            jsonp(mirrorURL, { value: "one" }, onComplete(0) );
+            jsonp(mirrorURL, { value: "two" }, onComplete(1) );
+            jsonp(mirrorURL, { value: "three" }, onComplete(2) );
 
             waitsFor(function() {
                 return complete[0] && complete[1] && complete[2];
-            }, "Reqeust never completed", 10000 );
+            }, "Request never completed", 10000 );
 
             runs(function() {
                 expect(content[0]).toEqual({ value: "one" });

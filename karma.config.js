@@ -27,7 +27,3 @@ autoWatch = true;
 
 // If browser does not capture in given timeout [ms], kill it
 captureTimeout = 60000;
-
-proxies =  {
-    "/express": "http://localhost:9000"
-};

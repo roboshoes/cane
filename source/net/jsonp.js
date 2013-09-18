@@ -22,9 +22,12 @@ define([
         return name;
     }
 
-    function jsonp(url, callback, parameters) {
+    function jsonp(url, parameters, callback) {
 
-        parameters = parameters || {};
+        if (typeof parameters === "function") {
+            callback = parameters;
+            parameters = {};
+        }
 
         var callbackName = generateName();
         var options = merge(parameters, { callback: callbackName });
