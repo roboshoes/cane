@@ -28,6 +28,15 @@ module.exports = function(grunt) {
                 }
             },
 
+            server: {
+                options: {
+                    node: true
+                },
+                files: {
+                    src: ["server/**/*.js"]
+                }
+            },
+
             tests: {
                 options: {
                     browser: true,
@@ -81,6 +90,11 @@ module.exports = function(grunt) {
                 tasks: ["jshint:source", "karma:dev:run"]
             },
 
+            server: {
+                files: ["server/**/*.js"],
+                tasks: ["jshint:server"]
+            },
+
             tests: {
                 files: ["tests/**/*.js", "!tests/runner.js"],
                 tasks: ["jshint:tests", "karma:dev:run"]
@@ -116,9 +130,9 @@ module.exports = function(grunt) {
         "grunt-karma"
     ].forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask("default", ["karma:dev", "watch"]);
+    grunt.registerTask("default", ["server", "karma:dev", "watch"]);
     grunt.registerTask("docs", ["mdoc"]);
-    grunt.registerTask("test", ["jshint", "karma:test"]);
+    grunt.registerTask("test", ["jshint", "server", "karma:test"]);
 
     grunt.registerMultiTask("mdoc", function() {
         var opts = this.options(),
@@ -130,6 +144,10 @@ module.exports = function(grunt) {
 
             mdoc.run(opts);
         });
+    });
+
+    grunt.registerTask("server", function() {
+        require("./server/main");
     });
 
 };

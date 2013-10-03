@@ -12,10 +12,10 @@ Build a Pull Request
 
 * Every PR should only include one feature or patch. If you have multiple
 contributions, make it multiple PRs.
-* Make sure the code is well tested. While you're add it, make sure it's not
+* Make sure the code is well tested. While you're at it, make sure it's not
 breaking any existing tests.
-* Proper commit messages and Try to keep the commit history clean.
-* Make sure the code is JSHinted. To do this automatically check out the
+* Proper commit messages and try to keep the commit history clean.
+* Make sure the code is JSHinted. To do this automatically, check out the
 _Development_ section
 
 __Note__: If you are proposing a major change, please open an issues before you
