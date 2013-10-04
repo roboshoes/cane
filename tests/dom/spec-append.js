@@ -9,10 +9,10 @@ define(["cane/dom/append"], function(append) {
 
             parent.appendChild(first);
             append(parent, last);
-            
-            expect(parent.childNodes.length).toBe(2);
-            expect(parent.firstChild).toBe(first);
-            expect(parent.lastChild).toBe(last);
+
+            expect(parent.childNodes.length).to.be(2);
+            expect(parent.firstChild).to.be(first);
+            expect(parent.lastChild).to.be(last);
         });
 
         it("should append multiple nodes", function() {
@@ -23,10 +23,10 @@ define(["cane/dom/append"], function(append) {
 
             append(parent, one, [two, three]);
 
-            expect(parent.childNodes.length).toBe(3);
-            expect(parent.childNodes[0]).toBe(one);
-            expect(parent.childNodes[1]).toBe(two);
-            expect(parent.childNodes[2]).toBe(three);
+            expect(parent.childNodes.length).to.be(3);
+            expect(parent.childNodes[0]).to.be(one);
+            expect(parent.childNodes[1]).to.be(two);
+            expect(parent.childNodes[2]).to.be(three);
         });
 
     });

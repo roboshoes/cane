@@ -13,7 +13,7 @@ define(["cane/dom/empty"], function(empty) {
 
             empty(parent);
 
-            expect(parent.childNodes.length).toBe(0);
+            expect(parent.childNodes.length).to.be(0);
 
         });
 
@@ -33,8 +33,8 @@ define(["cane/dom/empty"], function(empty) {
 
             empty(parentOne, parentTwo);
 
-            expect(parentOne.childNodes.length).toBe(0);
-            expect(parentTwo.childNodes.length).toBe(0);
+            expect(parentOne.childNodes.length).to.be(0);
+            expect(parentTwo.childNodes.length).to.be(0);
         });
     });
 });

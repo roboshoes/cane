@@ -19,7 +19,7 @@ define(["cane/events/delegate"], function(delegate) {
             child.dispatchEvent(event);
             document.body.removeChild(main);
 
-            expect(handler.calledOn(child)).toBe(true);
+            expect(handler.calledOn(child)).to.be(true);
         });
 
         it("should ignore events on elements that do not match", function() {
@@ -36,7 +36,7 @@ define(["cane/events/delegate"], function(delegate) {
             child.dispatchEvent(event);
             document.body.removeChild(main);
 
-            expect(handler.called).toBe(false);
+            expect(handler.called).to.be(false);
         });
 
         it("should ignore events on main element", function() {
@@ -51,7 +51,7 @@ define(["cane/events/delegate"], function(delegate) {
             main.dispatchEvent(event);
             document.body.removeChild(main);
 
-            expect(handler.called).toBe(false);
+            expect(handler.called).to.be(false);
         });
 
         it("should return an object with .remove function", function() {
@@ -69,7 +69,7 @@ define(["cane/events/delegate"], function(delegate) {
             listener.remove();
             child.dispatchEvent(event);
 
-            expect(handler.calledOnce).toBe(true);
+            expect(handler.calledOnce).to.be(true);
         });
 
         it("should accept multiple elements", function() {
@@ -91,7 +91,7 @@ define(["cane/events/delegate"], function(delegate) {
             child1.dispatchEvent(event);
             child2.dispatchEvent(event);
 
-            expect(handler.calledTwice).toBe(true);
+            expect(handler.calledTwice).to.be(true);
         });
 
     });

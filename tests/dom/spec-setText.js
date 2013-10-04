@@ -7,7 +7,7 @@ define(["cane/dom/setText"], function(setText) {
 
             setText(el, "foo bar");
 
-            expect(el.textContent).toBe("foo bar");
+            expect(el.textContent).to.be("foo bar");
         });
 
         it("shold set text content of multiple nodes", function() {
@@ -16,8 +16,8 @@ define(["cane/dom/setText"], function(setText) {
 
             setText([first, second], "foo");
 
-            expect(first.textContent).toBe("foo");
-            expect(second.textContent).toBe("foo");
+            expect(first.textContent).to.be("foo");
+            expect(second.textContent).to.be("foo");
         });
     });
 });

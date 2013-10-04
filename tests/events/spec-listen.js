@@ -11,9 +11,9 @@ define(["cane/events/listen"], function(listen) {
             listen(el, "test", callback);
             el.dispatchEvent(event);
 
-            expect(callback.calledOnce).toBe(true);
-            expect(callback.calledWith(event)).toBe(true);
-            expect(callback.calledOn(el)).toBe(true);
+            expect(callback.calledOnce).to.be(true);
+            expect(callback.calledWith(event)).to.be(true);
+            expect(callback.calledOn(el)).to.be(true);
         });
 
         it("should listen on multiple nodes", function() {
@@ -26,12 +26,12 @@ define(["cane/events/listen"], function(listen) {
             listen([first, second], "test", callback);
 
             first.dispatchEvent(event);
-            expect(callback.calledOnce).toBe(true);
-            expect(callback.calledOn(first)).toBe(true);
+            expect(callback.calledOnce).to.be(true);
+            expect(callback.calledOn(first)).to.be(true);
 
             second.dispatchEvent(event);
-            expect(callback.calledTwice).toBe(true);
-            expect(callback.calledOn(first)).toBe(true);
+            expect(callback.calledTwice).to.be(true);
+            expect(callback.calledOn(first)).to.be(true);
         });
 
         it("should listen on multiple nodes", function() {
@@ -45,10 +45,10 @@ define(["cane/events/listen"], function(listen) {
             listen(el, "foo bar", callback);
 
             el.dispatchEvent(fooEvent);
-            expect(callback.calledWith(fooEvent)).toBe(true);
+            expect(callback.calledWith(fooEvent)).to.be(true);
 
             el.dispatchEvent(barEvent);
-            expect(callback.calledWith(barEvent)).toBe(true);
+            expect(callback.calledWith(barEvent)).to.be(true);
         });
 
         it("should return a remove function to remove listener", function() {
@@ -61,7 +61,7 @@ define(["cane/events/listen"], function(listen) {
             listener.remove();
             el.dispatchEvent(event);
 
-            expect(callback.called).toBe(false);
+            expect(callback.called).to.be(false);
         });
 
     });
