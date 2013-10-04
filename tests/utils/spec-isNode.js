@@ -4,33 +4,33 @@ define(["cane/utils/isNode"], function(isNode) {
 
         it("should return true for DOM elements", function() {
             var element = document.createElement("div");
-            expect(isNode(element)).toBe(true);
+            expect(isNode(element)).to.be(true);
         });
 
         it("should return true for text nodes", function() {
             var node = document.createTextNode("test");
-            expect(isNode(node)).toBe(true);
+            expect(isNode(node)).to.be(true);
         });
 
         it("should return true for document fragments", function() {
             var node = document.createDocumentFragment();
-            expect(isNode(node)).toBe(true);
+            expect(isNode(node)).to.be(true);
         });
 
         it("should return false for strings", function() {
-            expect(isNode("<p>")).toBe(false);
+            expect(isNode("<p>")).to.be(false);
         });
 
         it("should return false for normal object", function() {
-            expect(isNode({})).toBe(false);
+            expect(isNode({})).to.be(false);
         });
 
         it("should return false for RegExp", function() {
-            expect(isNode(/test/)).toBe(false);
+            expect(isNode(/test/)).to.be(false);
         });
 
         it("should return false for null", function() {
-            expect(isNode(null)).toBe(false);
+            expect(isNode(null)).to.be(false);
         });
 
     });

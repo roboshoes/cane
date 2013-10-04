@@ -12,7 +12,7 @@ define(["cane/events/removeListener"], function(removeListener) {
             removeListener(el, "test", callback);
             el.dispatchEvent(event);
 
-            expect(callback.called).toBe(false);
+            expect(callback.called).to.be(false);
         });
 
         it("should remove event listener from multiple nodes", function() {
@@ -28,7 +28,7 @@ define(["cane/events/removeListener"], function(removeListener) {
             first.dispatchEvent(event);
             second.dispatchEvent(event);
 
-            expect(callback.called).toBe(false);
+            expect(callback.called).to.be(false);
         });
 
         it("should ignore if listener has not been added", function() {
@@ -54,7 +54,7 @@ define(["cane/events/removeListener"], function(removeListener) {
             el.dispatchEvent(fooEvent);
             el.dispatchEvent(barEvent);
 
-            expect(callback.called).toBe(false);
+            expect(callback.called).to.be(false);
         });
 
     });

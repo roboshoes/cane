@@ -8,7 +8,7 @@ define(["cane/utils/allNodes"], function(allNodes) {
 
             allNodes(node, function(n) { results.push(n); });
 
-            expect(results).toEqual([node]);
+            expect(results).to.eql([node]);
         });
 
         it("should call callback for each node in array of nodes", function() {
@@ -21,7 +21,7 @@ define(["cane/utils/allNodes"], function(allNodes) {
 
             allNodes(nodes, function(n) { results.push(n); });
 
-            expect(results).toEqual(nodes);
+            expect(results).to.eql(nodes);
         });
 
         it("should call callback for each node in NodeList", function() {
@@ -34,7 +34,7 @@ define(["cane/utils/allNodes"], function(allNodes) {
 
             allNodes(parent.children, function(n) { results.push(n); });
 
-            expect(results).toEqual([childOne, childTwo]);
+            expect(results).to.eql([childOne, childTwo]);
         });
 
         it("should recurse into nested lists", function() {
@@ -53,7 +53,7 @@ define(["cane/utils/allNodes"], function(allNodes) {
 
             allNodes(items, function(n) { results.push(n); });
 
-            expect(results).toEqual([
+            expect(results).to.eql([
                 items[0],
                 child,
                 items[2][0],
@@ -70,11 +70,11 @@ define(["cane/utils/allNodes"], function(allNodes) {
                 ];
 
             allNodes(node, function() {
-                expect(this).toBe(context);
+                expect(this).to.be(context);
             }, context);
 
             allNodes(nodes, function() {
-                expect(this).toBe(context);
+                expect(this).to.be(context);
             }, context);
         });
 

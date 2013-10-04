@@ -8,10 +8,10 @@ define(["cane/dom/children"], function(children) {
 
             var nodes = children(parent);
 
-            expect(nodes.length).toBe(3);
-            expect(nodes[0].nodeType).toBe(1);
-            expect(nodes[1].nodeType).toBe(1);
-            expect(nodes[2].nodeType).toBe(1);
+            expect(nodes.length).to.be(3);
+            expect(nodes[0].nodeType).to.be(1);
+            expect(nodes[1].nodeType).to.be(1);
+            expect(nodes[2].nodeType).to.be(1);
         });
 
         it("should return the children of several nodes", function() {
@@ -23,7 +23,7 @@ define(["cane/dom/children"], function(children) {
 
             var nodes = children( [parentOne, parentTwo] );
 
-            expect(nodes.length).toBe(5);
+            expect(nodes.length).to.be(5);
         });
 
     });

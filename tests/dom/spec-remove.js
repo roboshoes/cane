@@ -12,8 +12,8 @@ define(["cane/dom/remove"], function(remove) {
 
             remove(childOne);
 
-            expect(parent.children.length).toBe(1);
-            expect(parent.firstChild).toBe(childTwo);
+            expect(parent.children.length).to.be(1);
+            expect(parent.firstChild).to.be(childTwo);
         });
 
         it("should remove multiple nodes", function() {
@@ -29,7 +29,7 @@ define(["cane/dom/remove"], function(remove) {
 
             remove(children[0], [children[1], children[2]]);
 
-            expect(parent.children.length).toBe(0);
+            expect(parent.children.length).to.be(0);
         });
 
         it("should remove text nodes", function() {
@@ -39,7 +39,7 @@ define(["cane/dom/remove"], function(remove) {
 
             remove(text);
 
-            expect(parent.children.length).toBe(0);
+            expect(parent.children.length).to.be(0);
         });
 
         it("should ignore nodes that do not have a parent", function() {

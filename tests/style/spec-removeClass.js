@@ -8,7 +8,7 @@ define(["cane/style/removeClass"], function(removeClass) {
 
             removeClass(node, "one");
 
-            expect(node.className).toBe("two");
+            expect(node.className).to.be("two");
         });
 
         it("should remove multiple classes from an element", function() {
@@ -17,7 +17,7 @@ define(["cane/style/removeClass"], function(removeClass) {
 
             removeClass(node, "one three");
 
-            expect(node.className).toBe("two");
+            expect(node.className).to.be("two");
         });
 
         it("should remove classes to array of nodes", function() {
@@ -28,8 +28,8 @@ define(["cane/style/removeClass"], function(removeClass) {
 
             removeClass([node1, node2], "three two");
 
-            expect(node1.className).toBe("one");
-            expect(node2.className).toBe("four five");
+            expect(node1.className).to.be("one");
+            expect(node2.className).to.be("four five");
         });
 
         it("should add classes to NodeList", function() {
@@ -45,8 +45,8 @@ define(["cane/style/removeClass"], function(removeClass) {
 
             removeClass(nodes, "three two");
 
-            expect(node1.className).toBe("one");
-            expect(node2.className).toBe("four five");
+            expect(node1.className).to.be("one");
+            expect(node2.className).to.be("four five");
 
             body.removeChild(node1);
             body.removeChild(node2);
