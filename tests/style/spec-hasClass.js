@@ -6,8 +6,8 @@ define(["cane/style/hasClass"], function (hasClass) {
             var node = document.createElement("div");
             node.className = "foo";
 
-            expect( hasClass(node, "foo") ).toBe(true);
-            expect( hasClass(node, "bar") ).toBe(false);
+            expect( hasClass(node, "foo") ).to.be(true);
+            expect( hasClass(node, "bar") ).to.be(false);
         });
 
         it("should check for multiple classes", function() {
@@ -17,8 +17,8 @@ define(["cane/style/hasClass"], function (hasClass) {
             first.className = "foo bar woot";
             second.className = "one two three";
 
-            expect( hasClass(first, "bar woot foo") ).toBe(true);
-            expect( hasClass(second, "five three") ).toBe(false);
+            expect( hasClass(first, "bar woot foo") ).to.be(true);
+            expect( hasClass(second, "five three") ).to.be(false);
         });
 
         it("should check on multiple elements", function() {
@@ -32,8 +32,8 @@ define(["cane/style/hasClass"], function (hasClass) {
 
             var nodes = document.getElementsByTagName("h1");
 
-            expect( hasClass(nodes, "two three") ).toBe(true);
-            expect( hasClass(nodes, "two five") ).toBe(false);
+            expect( hasClass(nodes, "two three") ).to.be(true);
+            expect( hasClass(nodes, "two five") ).to.be(false);
         });
 
     });

@@ -4,11 +4,12 @@
 basePath = ".";
 
 files = [
-    JASMINE,
-    JASMINE_ADAPTER,
+    MOCHA,
+    MOCHA_ADAPTER,
     REQUIRE,
     REQUIRE_ADAPTER,
     "node_modules/sinon/pkg/sinon.js",
+    "node_modules/expect.js/expect.js",
     "tests/runner.js",
     { pattern: "source/**/*.js", included: false },
     { pattern: "tests/**/*.js", included: false },

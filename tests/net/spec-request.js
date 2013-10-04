@@ -2,60 +2,28 @@ define(["cane/net/request"], function(request) {
 
     describe("net/request()", function() {
 
-        it("should trigger completed and success", function() {
-
-            var completed = false;
-            var success = false;
-            var response = {};
-
+        it("should trigger completed and success", function(done) {
             request({
                 url: "base/tests/resources/test.txt",
                 completed: function(responseDate, status) {
-                    response.text = responseDate;
-                    response.status = status;
-                    completed = true;
+                    expect(responseDate).to.be("Successfully loaded");
+                    expect(status).to.be(200);
                 },
                 success: function() {
-                    success = true;
+                    done();
                 }
             });
-
-            waitsFor(function() {
-                return completed && success;
-            }, "Request never completed", 10000);
-
-            runs(function() {
-                expect(response.text).toBe("Successfully loaded");
-                expect(response.status).toBe(200);
-            });
-
         });
 
-        it("should trigger completed and error", function() {
-
-            var completed = false;
-            var error = false;
-            var response = {};
+        it("should trigger error", function(done) {
 
             request({
                 url: "base/tests/resources/wrong.txt",
-                completed: function() {
-                    completed = true;
-                },
                 error: function(responseData, status) {
-                    response.status = status;
-                    error = true;
+                    expect(status).to.be(404);
+                    done();
                 }
             });
-
-            waitsFor(function() {
-                return completed && error;
-            }, "Request never completed", 10000);
-
-            runs(function() {
-                expect(response.status).toBe(404);
-            });
-
         });
 
         describe("request methods and parameters", function() {
@@ -76,8 +44,8 @@ define(["cane/net/request"], function(request) {
                 });
 
                 var xhr = server.requests[0];
-                expect(xhr.method).toEqual("POST");
-                expect(xhr.url).toEqual("/test");
+                expect(xhr.method).to.equal("POST");
+                expect(xhr.url).to.equal("/test");
             });
 
             it("should use PUT method", function() {
@@ -87,8 +55,8 @@ define(["cane/net/request"], function(request) {
                 });
 
                 var xhr = server.requests[0];
-                expect(xhr.method).toEqual("PUT");
-                expect(xhr.url).toEqual("/test");
+                expect(xhr.method).to.equal("PUT");
+                expect(xhr.url).to.equal("/test");
             });
 
             it("should add header parameters", function() {
@@ -102,7 +70,7 @@ define(["cane/net/request"], function(request) {
                 });
 
                 var xhr = server.requests[0];
-                expect(xhr.requestHeaders).toEqual(headers);
+                expect(xhr.requestHeaders).to.eql(headers);
             });
 
             it("should send data", function() {
@@ -115,7 +83,7 @@ define(["cane/net/request"], function(request) {
                 });
 
                 var xhr = server.requests[0];
-                expect(xhr.requestBody).toEqual(data);
+                expect(xhr.requestBody).to.equal(data);
             });
 
         });
@@ -141,7 +109,7 @@ define(["cane/net/request"], function(request) {
 
                 var xhr = server.requests[0];
                 xhr.respond(200, {}, "");
-                expect(success.calledWith("", 200)).toBe(true);
+                expect(success.calledWith("", 200)).to.be(true);
             });
 
             it("should call success on 304 response", function() {
@@ -154,7 +122,7 @@ define(["cane/net/request"], function(request) {
 
                 var xhr = server.requests[0];
                 xhr.respond(304, {}, "");
-                expect(success.calledWith("", 304)).toBe(true);
+                expect(success.calledWith("", 304)).to.be(true);
             });
 
             it("should call error on 400 response", function() {
@@ -167,7 +135,7 @@ define(["cane/net/request"], function(request) {
 
                 var xhr = server.requests[0];
                 xhr.respond(400, {}, "");
-                expect(error.calledWith("", 400)).toBe(true);
+                expect(error.calledWith("", 400)).to.be(true);
             });
 
             it("should call error on 500 response", function() {
@@ -180,7 +148,7 @@ define(["cane/net/request"], function(request) {
 
                 var xhr = server.requests[0];
                 xhr.respond(500, {}, "");
-                expect(error.calledWith("", 500)).toBe(true);
+                expect(error.calledWith("", 500)).to.be(true);
             });
 
         });
