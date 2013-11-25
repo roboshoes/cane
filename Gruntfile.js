@@ -50,7 +50,6 @@ module.exports = function(grunt) {
                         beforeEach: false,
                         afterEach: false,
                         runs: false,
-                        waitsFor: false,
                         sinon: false
                     }
                 },

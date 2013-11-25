@@ -78,6 +78,18 @@ define(["cane/utils/allNodes"], function(allNodes) {
             }, context);
         });
 
+        it("should perform querySlectorAll on string", function() {
+            var div = document.createElement("div");
+            div.className = "foo";
+            document.body.appendChild(div);
+
+            allNodes(".foo", function(node) {
+                node.className = "";
+            });
+
+            expect(div.className).to.be("");
+        });
+
     });
 
 });
