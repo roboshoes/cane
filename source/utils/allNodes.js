@@ -6,15 +6,13 @@ define([
 
     function allNodes(nodes, callback, context) {
         function iterator(item) {
-            if (!isList(item)) {
+            if (isString(item)) {
+                forEach(document.querySelectorAll(item), iterator);
+            } else if (!isList(item)) {
                 callback.call(context, item);
             } else {
                 forEach(item, iterator);
             }
-        }
-
-        if (isString(nodes)) {
-            nodes = document.querySelector(nodes);
         }
 
         iterator(nodes);
