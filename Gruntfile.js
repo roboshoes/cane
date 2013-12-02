@@ -49,8 +49,6 @@ module.exports = function(grunt) {
                         it: false,
                         beforeEach: false,
                         afterEach: false,
-                        runs: false,
-                        waitsFor: false,
                         sinon: false
                     }
                 },

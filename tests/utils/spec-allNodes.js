@@ -78,6 +78,56 @@ define(["cane/utils/allNodes"], function(allNodes) {
             }, context);
         });
 
+        describe("using strings as querys", function() {
+            beforeEach(function() {
+                this.build = function(name) {
+                    var element = document.createElement("div");
+                    element.className = name;
+                    document.body.appendChild(element);
+                    return element;
+                };
+
+                this.foo = this.build("foo");
+                this.bar = this.build("bar");
+            });
+
+            afterEach(function() {
+                document.body.removeChild(this.foo);
+                document.body.removeChild(this.bar);
+            });
+
+            it("should perform querySelectorAll on string", function() {
+                allNodes(".foo", function(node) {
+                    node.className = "";
+                });
+
+                expect(this.foo.className).to.be("");
+            });
+
+            it("should perform querySelectorAll on an array of strings", function() {
+
+                var div = this.build("baz");
+
+                allNodes(
+                    [
+                        ".foo",
+                        ".bar",
+                        [ div ]
+                    ],
+                    function(node) {
+                        node.className = "";
+                    }
+                );
+
+                expect(this.foo.className).to.be("");
+                expect(this.bar.className).to.be("");
+                expect(div.className).to.be("");
+
+                document.body.removeChild(div);
+            });
+
+        });
+
     });
 
 });

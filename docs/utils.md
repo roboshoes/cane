@@ -9,7 +9,9 @@ Handles enumerating over a list of nodes, or handling a single node.
 
 If `nodes` is a list of nodes, it will call `callback` for each item in the
 list, recursing into nested lists. If `nodes` is a single node, it will call
-`callback` with that node. It will pass the current node as the first parameter
+`callback` with that node. If `nodes` is a string, or an entry of `nodes` is a string,
+it will perform a query using `document.querySelectorAll` call `callback` for each
+item the query returns. It will pass the current node as the first parameter
 to `callback`. If `context` is provided, `this` will be set to `context` in the
 callback.
 
