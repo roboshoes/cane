@@ -77,6 +77,39 @@ create("div", { "id": "container" }, test);
 create("div", { "class": "test" }, "Hello World!");
 ```
 
+## createVideo([sources], [attributes])
+
+Creates a DOM `video` element and creates `source` child nodes for every source specified.
+
+`sources` can be supplied as an array of strings or a single string. `attributes` is an
+object which key-value pairs are used to set attributes of the `video` element.
+
+
+Examples:
+
+```js
+// Element (<video/>)
+var video = createVideo();
+
+
+// Element
+// <video>
+//   <source src="video.mp4" type="video/mp4"/>
+//   <source src="video.ogg" type="video/ogg"/>
+// </video>
+var video = createVideo(["video.mp4", "video.ogg"]);
+
+// Element
+// <video poster="image.jpg" controls="controls">
+//   <source src="video.mp4" type="video/mp4"/>
+// </video>
+var video = createVideo("video.mp4", { poster: "image.jpg", controls: "controls" });
+
+// Element
+// <video poster="image.jpg" />
+var video = createVideo({ poster: "image.jpg" });
+```
+
 
 ## empty(items...)
 
