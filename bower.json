@@ -1,6 +1,6 @@
 {
 	"name": "cane",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"description": "Modular DOM library",
 	"main": "source/",
 	"ignore": [
@@ -15,6 +15,6 @@
 		"CONTRIBUTEING.md"
 	],
 	"dependencies": {
-		"mout":"~0.6.0"
+		"mout":"~0.8.0"
 	}
 }
