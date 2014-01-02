@@ -1,17 +1,11 @@
-define(function() {
+define(["mout/array/indexOf"], function(indexOf) {
 
     function index(node) {
         if (!node.parentNode) {
             return -1;
         }
 
-        var count = 0;
-
-        while (!!(node = node.previousSibling)) {
-            count++;
-        }
-
-        return count;
+        return indexOf(node.parentNode.children, node);
     }
 
     return index;
