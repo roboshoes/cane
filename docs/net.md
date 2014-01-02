@@ -8,7 +8,10 @@ Utilities for leoding and handling external resources
 This is a short hand for [`request`](#request). It loads and parses a json file. If loading
 is successful `success` will be called in the context of the `xhr` request and with the parsed
 JSON as argument.
-`error`, if provided, is called when the call either fails or the recieved JSON is not parsable.
+`error`, if provided, is called when the call either fails or the recieved JSON is not parsable. In the case
+of an error while converting the response into an JavaScript object, the error callback
+recieves the `exception` being thrown as well as the recieved `data` and the `status` of the response in that order.
+If the request fails on the request level, the error callback will be called with the `responseText` and the `status` only.
 
 See also: [`request`](#request)
 
