@@ -12,7 +12,7 @@ define([
             try {
                 success.call(this, JSON.parse(data));
             } catch (exception) {
-                error.call(this, data, status);
+                error.call(this, exception, data, status);
             }
         }
 
