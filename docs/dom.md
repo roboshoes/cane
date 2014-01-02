@@ -99,6 +99,24 @@ var element = document.createElement("div");
 var f = fragment(element);
 ```
 
+## index(item)
+
+Returns the index of the node within its list of siblings. If the node is not in the DOM it return `-1`
+
+```html
+<ul>
+    <li>One</li>
+    <li class="two">Two</li>
+    <li>Three</li>
+</ul>
+```
+
+```js
+var node = document.querySelector(".two");
+
+index(node); // 1
+```
+
 
 ## matches(selector, items...)
 
