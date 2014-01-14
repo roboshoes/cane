@@ -100,6 +100,39 @@ var f = fragment(element);
 ```
 
 
+## insertAt(parent, nodes, index)
+
+Inserts a node or an array of nodes into the parents list of children at given index. Any
+index smaller than 1 will lead into prepending the nodes and any index larger than the
+amount of children in the parent node will result in appending the nodes.
+
+```html
+<ul id="list">
+    <li>One</li>
+    <li>Two</li>
+    <li>Four</li>
+    <li>Five</li>
+</ul>
+```
+```js
+var three = document.createElement("li");
+three.innerText = "Three";
+
+var ul = document.getElementById("list");
+
+insertAt(ul, three, 2);
+```
+This results in:
+```html
+<ul id="list">
+    <li>One</li>
+    <li>Two</li>
+    <li>Three</li>
+    <li>Four</li>
+    <li>Five</li>
+</ul>
+```
+
 ## matches(selector, items...)
 
 Returns true if all items match the CSS selector.
