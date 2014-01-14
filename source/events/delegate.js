@@ -14,16 +14,16 @@ define(["./listen", "../dom/matches"], function(listen, matches) {
         }
     }
 
-    function listenOn(root, selector, eventName, handler) {
+    function delegate(root, selector, eventName, handler, context) {
         return listen(root, eventName, function(e) {
             var target = getTarget(e, selector, root);
             if (target) {
-                handler.call(target, e);
+                handler.call(context ? context : target, e);
             }
         });
     }
 
-    return listenOn;
+    return delegate;
 
 });
 
