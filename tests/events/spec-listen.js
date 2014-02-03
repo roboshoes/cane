@@ -64,6 +64,19 @@ define(["cane/events/listen"], function(listen) {
             expect(callback.called).to.be(false);
         });
 
+        it("should call callback in context if specified", function() {
+            var context = { a: 1 },
+                el = document.createElement("div"),
+                event = document.createEvent("Event"),
+                callback = sinon.spy();
+            event.initEvent("test", true, true);
+
+            listen(el, "test", callback, context);
+            el.dispatchEvent(event);
+
+            expect(callback.calledOn(context)).to.be(true);
+        });
+
     });
 
 });

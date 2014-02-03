@@ -2,12 +2,17 @@ define([
     "../utils/allNodes",
     "./removeListener",
     "mout/lang/isArray",
-    "mout/array/forEach"
-], function(allNodes, removeListener, isArray, forEach) {
+    "mout/array/forEach",
+    "mout/function/bind"
+], function(allNodes, removeListener, isArray, forEach, bind) {
 
-    function listen(nodes, eventNames, callback) {
+    function listen(nodes, eventNames, callback, context) {
         if (!isArray(eventNames)) {
             eventNames = eventNames.split(" ");
+        }
+
+        if (context) {
+            callback = bind(callback, context);
         }
 
         allNodes(nodes, function(node) {

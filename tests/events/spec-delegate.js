@@ -94,6 +94,23 @@ define(["cane/events/delegate"], function(delegate) {
             expect(handler.calledTwice).to.be(true);
         });
 
+        it("should call callback in context if specified", function() {
+            var span = document.createElement("span"),
+                el = document.createElement("div"),
+                event = document.createEvent("Event"),
+                callback = sinon.spy(),
+                context = { foo: "bar" };
+            event.initEvent("test", true, true);
+
+            el.appendChild(span);
+            document.body.appendChild(el);
+
+            delegate(el, "span", "test", callback, context);
+            span.dispatchEvent(event);
+
+            expect(callback.calledOn(context)).to.be(true);
+        });
+
     });
 
 });

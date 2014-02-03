@@ -3,7 +3,7 @@
 Utilities for manipulating and observing DOM events.
 
 
-## delegate(root, selector, eventNames, callback)
+## delegate(root, selector, eventNames, callback, [context]):Object
 
 Adds `callback` as an event listener that will listen for events that bubble
 from elements that match `selector`.
@@ -18,6 +18,8 @@ triggered on an element that is a child of `root` and matches the specified CSS
 selector. It will not be called when an event is triggered directly on `root`.
 The first argument to `callback` will be the `Event` object and the context will
 be the child node that matches `selector`.
+
+`context` optionally overrides the context of the callback.
 
 The return value is an object that contains a `.remove` function that when
 called will remove the event listener. You cannot remove the listener with
@@ -35,7 +37,7 @@ delegate(container, "button.action", "click", function() {
 See also: [`listen`](#listen)
 
 
-## listen(nodes, eventNames, callback):Object
+## listen(nodes, eventNames, callback, [context]):Object
 
 Adds `callback` as an event listener to all the nodes for the specified events.
 
@@ -46,6 +48,8 @@ attached to.
 `callback` will be called whenever the event is triggered on any of the provided
 nodes. The first argument to `callback` will be the `Event` object and the
 context will be the node that triggered the event.
+
+`context` optionally overrides the context of the callback.
 
 The return value is an object that contains a `remove` method that will remove
 the listener that was added. You can also use
