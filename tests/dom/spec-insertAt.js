@@ -34,7 +34,7 @@ define(["cane/dom/insertAt"], function(insertAt) {
             expect(parent.children[3]).to.be(div);
         });
 
-        it("should prepend node if index small than 1", function() {
+        it("should determin index from the end of array if index is negative", function() {
             var parent = document.createElement("div"),
                 first = document.createElement("span"),
                 second = document.createElement("span"),
@@ -45,9 +45,18 @@ define(["cane/dom/insertAt"], function(insertAt) {
             parent.appendChild(second);
             parent.appendChild(third);
 
-            insertAt(parent, div, -25);
+            insertAt(parent, div, -1);
 
-            expect(parent.children[0]).to.be(div);
+            expect(parent.children[0]).to.be(first);
+            expect(parent.children[1]).to.be(second);
+            expect(parent.children[2]).to.be(div);
+            expect(parent.children[3]).to.be(third);
+
+            parent.removeChild(div);
+
+            insertAt(parent, div, -2);
+
+            expect(parent.children[1]).to.be(div);
         });
 
         it("should insert multiple nodes", function() {

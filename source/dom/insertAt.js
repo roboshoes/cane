@@ -1,22 +1,19 @@
 define([
-    "mout/math/clamp",
     "./append",
-    "../utils/allNodes"
-], function(clamp, append, allNodes) {
+    "./fragment"
+], function(append, fragment) {
 
     function insertAt(parent, nodes, index) {
 
-        index = Math.max(index, 0);
+        if (index < 0) {
+            index = parent.children.length + index;
+        }
 
         if (index >= parent.children.length) {
             append(parent, nodes);
         } else {
-            var sibling;
-            allNodes(nodes, function(node) {
-                sibling = parent.children[ index ];
-                parent.insertBefore(node, sibling);
-                index++;
-            });
+            var sibling = parent.children[ index ];
+            parent.insertBefore(fragment(nodes), sibling);
         }
     }
 
