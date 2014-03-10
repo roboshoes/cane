@@ -39,24 +39,31 @@ define(["cane/dom/insertAt"], function(insertAt) {
                 first = document.createElement("span"),
                 second = document.createElement("span"),
                 third = document.createElement("span"),
-                div = document.createElement("div");
+                foo = document.createElement("div");
+
 
             parent.appendChild(first);
             parent.appendChild(second);
             parent.appendChild(third);
 
-            insertAt(parent, div, -1);
+            insertAt(parent, foo, -1);
 
             expect(parent.children[0]).to.be(first);
             expect(parent.children[1]).to.be(second);
-            expect(parent.children[2]).to.be(div);
+            expect(parent.children[2]).to.be(foo);
             expect(parent.children[3]).to.be(third);
 
-            parent.removeChild(div);
+            parent.removeChild(foo);
 
-            insertAt(parent, div, -2);
+            insertAt(parent, foo, -2);
 
-            expect(parent.children[1]).to.be(div);
+            expect(parent.children[1]).to.be(foo);
+
+            parent.removeChild(foo);
+
+            insertAt(parent, foo, -7);
+
+            expect(parent.children[0]).to.be(foo);
         });
 
         it("should insert multiple nodes", function() {
