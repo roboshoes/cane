@@ -25,7 +25,7 @@ proper one).
 Dependencies
 ------------
 
-Cane.js uses [mout](http://moutjs.com) which has do be available under the path
+Cane uses [mout](http://moutjs.com) which has do be available under the path
 `mout`.
 
 

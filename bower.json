@@ -1,20 +1,21 @@
 {
 	"name": "cane",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "Modular DOM library",
 	"main": "source/",
 	"ignore": [
 		"docs",
 		"lib",
+		"server",
 		"node_modules",
 		"tests",
 		".travis.yml",
 		"Gruntfile.js",
 		"karma.config.js",
 		"package.json",
-		"CONTRIBUTEING.md"
+		"CONTRIBUTING.md"
 	],
 	"dependencies": {
-		"mout":"~0.8.0"
+		"mout":"~0.9.0"
 	}
 }
