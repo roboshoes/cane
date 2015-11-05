@@ -1,50 +1,47 @@
-define([
-    "../dom/create",
-    "../dom/append",
-    "../dom/remove",
-    "mout/queryString/encode",
-    "mout/object/merge",
-    "mout/array/remove"
-], function(create, append, domRemove, encode, merge, arrayRemove) {
+var create = require("../dom/create");
+var append = require("../dom/append");
+var domRemove = require("../dom/remove");
+var encode = require("mout/queryString/encode");
+var merge = require("mout/object/merge");
+var arrayRemove = require("mout/array/remove");
 
-    var usedNames = [];
+var usedNames = [];
 
-    function generateName() {
-        var timestamp = Date.now();
-        var name = "jsonp" + timestamp;
+function generateName() {
+    var timestamp = Date.now();
+    var name = "jsonp" + timestamp;
 
-        while (usedNames.indexOf(name) > -1) {
-            name = "jsonp" + (++timestamp);
-        }
-
-        usedNames.push(name);
-
-        return name;
+    while (usedNames.indexOf(name) > -1) {
+        name = "jsonp" + (++timestamp);
     }
 
-    function jsonp(url, parameters, callback) {
+    usedNames.push(name);
 
-        if (typeof parameters === "function") {
-            callback = parameters;
-            parameters = {};
-        }
+    return name;
+}
 
-        var callbackName = generateName();
-        var options = merge(parameters, { callback: callbackName });
-        var script = create("script", { src: url + encode(options) });
+function jsonp(url, parameters, callback) {
 
-        window[callbackName] = function(data) {
-            delete window[callbackName];
-
-            arrayRemove(usedNames, callbackName);
-            domRemove(script);
-
-            callback(data);
-        };
-
-        append(document.head, script);
+    if (typeof parameters === "function") {
+        callback = parameters;
+        parameters = {};
     }
 
-    return jsonp;
+    var callbackName = generateName();
+    var options = merge(parameters, { callback: callbackName });
+    var script = create("script", { src: url + encode(options) });
 
-} );
+    window[callbackName] = function(data) {
+        delete window[callbackName];
+
+        arrayRemove(usedNames, callbackName);
+        domRemove(script);
+
+        callback(data);
+    };
+
+    append(document.head, script);
+}
+
+module.exports = jsonp;
+

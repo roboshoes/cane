@@ -1,12 +1,10 @@
-define([
-	"../utils/allNodes"
-], function(allNodes) {
+var allNodes = require("../utils/allNodes");
 
-	function empty() {
-		allNodes(arguments, function(node) {
-			node.textContent = "";
-		});
-	}
+function empty() {
+    allNodes(arguments, function(node) {
+        node.textContent = "";
+    });
+}
 
-	return empty;
-});
+module.exports = empty;
+

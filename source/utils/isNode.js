@@ -1,11 +1,5 @@
-define(function() {
+function isNode(value) {
+    return value instanceof window.Node;
+}
 
-    var Node = window.Node;
-
-    function isNode(value) {
-        return value instanceof Node;
-    }
-
-    return isNode;
-
-});
+module.exports = isNode;
