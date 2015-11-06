@@ -1,54 +1,59 @@
-define(["cane/dom/remove"], function(remove) {
+var test = require( "tape" );
+var remove = require( "../../source/dom/remove" );
 
-    describe("dom/remove", function() {
+test("should remove node from parent node", function( t ) {
+    t.plan( 2 );
 
-        it("should remove node from parent node", function() {
-            var parent = document.createElement("div"),
-                childOne = document.createElement("span"),
-                childTwo = document.createElement("span");
+    var parent = document.createElement("div"),
+        childOne = document.createElement("span"),
+        childTwo = document.createElement("span");
 
-            parent.appendChild(childOne);
-            parent.appendChild(childTwo);
+    parent.appendChild(childOne);
+    parent.appendChild(childTwo);
 
-            remove(childOne);
+    remove(childOne);
 
-            expect(parent.children.length).to.be(1);
-            expect(parent.firstChild).to.be(childTwo);
-        });
+    t.equal(parent.children.length, 1);
+    t.equal(parent.firstChild, childTwo);
+});
 
-        it("should remove multiple nodes", function() {
-            var parent = document.createElement("div"),
-                children = [
-                    document.createElement("span"),
-                    document.createElement("span"),
-                    document.createElement("span")
-                ];
-            parent.appendChild(children[0]);
-            parent.appendChild(children[1]);
-            parent.appendChild(children[2]);
+test("should remove multiple nodes", function( t ) {
+    t.plan( 1 );
 
-            remove(children[0], [children[1], children[2]]);
+    var parent = document.createElement("div"),
+        children = [
+            document.createElement("span"),
+            document.createElement("span"),
+            document.createElement("span")
+        ];
+    parent.appendChild(children[0]);
+    parent.appendChild(children[1]);
+    parent.appendChild(children[2]);
 
-            expect(parent.children.length).to.be(0);
-        });
+    remove(children[0], [children[1], children[2]]);
 
-        it("should remove text nodes", function() {
-            var parent = document.createElement("div"),
-                text = document.createTextNode("test");
-            parent.appendChild(text);
+    t.equal(parent.children.length, 0);
+});
 
-            remove(text);
+test("should remove text nodes", function( t ) {
+    t.plan( 1 );
 
-            expect(parent.children.length).to.be(0);
-        });
+    var parent = document.createElement("div"),
+        text = document.createTextNode("test");
+    parent.appendChild(text);
 
-        it("should ignore nodes that do not have a parent", function() {
-            var node = document.createElement("div"),
-                text = document.createTextNode("Hello World!");
+    remove(text);
 
-            remove(node, text);
-        });
+    t.equal(parent.children.length, 0);
+});
 
+test("should ignore nodes that do not have a parent", function( t ) {
+    t.plan( 1 );
+
+    var node = document.createElement("div"),
+        text = document.createTextNode("Hello World!");
+
+    t.doesNotThrow( function() {
+        remove(node, text);
     });
-
 });

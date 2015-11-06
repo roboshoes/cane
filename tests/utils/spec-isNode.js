@@ -1,38 +1,41 @@
-define(["cane/utils/isNode"], function(isNode) {
+var test = require( "tape" );
+var isNode = require( "../../source/utils/isNode" );
 
-    describe("utils/isNode", function() {
 
-        it("should return true for DOM elements", function() {
-            var element = document.createElement("div");
-            expect(isNode(element)).to.be(true);
-        });
+test("should return true for DOM elements", function( t ) {
+    t.plan( 1 );
+    var element = document.createElement("div");
+    t.ok(isNode(element));
+});
 
-        it("should return true for text nodes", function() {
-            var node = document.createTextNode("test");
-            expect(isNode(node)).to.be(true);
-        });
+test("should return true for text nodes", function( t ) {
+    t.plan( 1 );
+    var node = document.createTextNode("test");
+    t.ok(isNode(node));
+});
 
-        it("should return true for document fragments", function() {
-            var node = document.createDocumentFragment();
-            expect(isNode(node)).to.be(true);
-        });
+test("should return true for document fragments", function( t ) {
+    t.plan( 1 );
+    var node = document.createDocumentFragment();
+    t.ok(isNode(node));
+});
 
-        it("should return false for strings", function() {
-            expect(isNode("<p>")).to.be(false);
-        });
+test("should return false for strings", function( t ) {
+    t.plan( 1 );
+    t.notOk(isNode("<p>"));
+});
 
-        it("should return false for normal object", function() {
-            expect(isNode({})).to.be(false);
-        });
+test("should return false for normal object", function( t ) {
+    t.plan( 1 );
+    t.notOk(isNode({}));
+});
 
-        it("should return false for RegExp", function() {
-            expect(isNode(/test/)).to.be(false);
-        });
+test("should return false for RegExp", function( t ) {
+    t.plan( 1 );
+    t.notOk(isNode(/test/));
+});
 
-        it("should return false for null", function() {
-            expect(isNode(null)).to.be(false);
-        });
-
-    });
-
+test("should return false for null", function( t ) {
+    t.plan( 1 );
+    t.notOk(isNode(null));
 });

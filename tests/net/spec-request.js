@@ -1,158 +1,207 @@
-define(["cane/net/request"], function(request) {
+var test = require( "tape" );
+var sinon = require( "sinon" );
+var request = require( "../../source/net/request" );
 
-    describe("net/request()", function() {
+test("should trigger completed and success", function( t ) {
+    t.plan( 3 );
+    t.timeoutAfter( 10000 );
 
-        it("should trigger completed and success", function(done) {
-            request({
-                url: "base/tests/resources/test.txt",
-                completed: function(responseDate, status) {
-                    expect(responseDate).to.be("Successfully loaded");
-                    expect(status).to.be(200);
-                },
-                success: function() {
-                    done();
-                }
-            });
+    request({
+        url: "base/tests/resources/test.txt",
+        completed: function(responseDate, status) {
+            t.equal(responseDate, "Successfully loaded");
+            t.equal(status, 200);
+        },
+        success: function() {
+            t.equal( true, true );
+        }
+    });
+});
+
+test("should trigger error", function( t ) {
+    t.plan( 1 );
+
+    request({
+        url: "base/tests/resources/wrong.txt",
+        error: function(responseData, status) {
+            t.equal(status, 404);
+        }
+    });
+});
+
+test("request methods and parameters", function(t) {
+    t.plan( 4 );
+
+    var server;
+
+    function setup() {
+        server = sinon.fakeServer.create();
+    }
+
+    function teardown() {
+        server.restore();
+    }
+
+    t.test("should use POST method", function(st) {
+        st.plan( 2 );
+
+        setup();
+
+        request({
+            method: "POST",
+            url: "/test"
         });
 
-        it("should trigger error", function(done) {
+        var xhr = server.requests[0];
+        st.eqaul(xhr.method, "POST");
+        st.equal(xhr.url, "/test");
 
-            request({
-                url: "base/tests/resources/wrong.txt",
-                error: function(responseData, status) {
-                    expect(status).to.be(404);
-                    done();
-                }
-            });
+        teardown();
+    });
+
+    t.test("should use PUT method", function( st ) {
+        setup();
+
+        st.plan( 2 );
+
+        request({
+            method: "PUT",
+            url: "/test"
         });
 
-        describe("request methods and parameters", function() {
-            var server;
+        var xhr = server.requests[0];
+        st.equal(xhr.method, "PUT");
+        st.equal(xhr.url, "/test");
 
-            beforeEach(function() {
-                server = sinon.fakeServer.create();
-            });
+        teardown();
+    });
 
-            afterEach(function() {
-                server.restore();
-            });
+    t.test("should add header parameters", function( st ) {
+        setup();
 
-            it("should use POST method", function() {
-                request({
-                    method: "POST",
-                    url: "/test"
-                });
+        st.plan( 1 );
 
-                var xhr = server.requests[0];
-                expect(xhr.method).to.equal("POST");
-                expect(xhr.url).to.equal("/test");
-            });
+        var headers = {
+            Accept: "text/plain"
+        };
 
-            it("should use PUT method", function() {
-                request({
-                    method: "PUT",
-                    url: "/test"
-                });
-
-                var xhr = server.requests[0];
-                expect(xhr.method).to.equal("PUT");
-                expect(xhr.url).to.equal("/test");
-            });
-
-            it("should add header parameters", function() {
-                var headers = {
-                    Accept: "text/plain"
-                };
-
-                request({
-                    url: "base/test/resources/test.txt",
-                    headers: headers
-                });
-
-                var xhr = server.requests[0];
-                expect(xhr.requestHeaders).to.eql(headers);
-            });
-
-            it("should send data", function() {
-                var data = "test data";
-
-                request({
-                    method: "POST",
-                    url: "/test",
-                    data: data
-                });
-
-                var xhr = server.requests[0];
-                expect(xhr.requestBody).to.equal(data);
-            });
-
+        request({
+            url: "base/test/resources/test.txt",
+            headers: headers
         });
 
-        describe("response codes", function() {
-            var server;
+        var xhr = server.requests[0];
+        st.deepEqual(xhr.requestHeaders, headers);
 
-            beforeEach(function() {
-                server = sinon.fakeServer.create();
-            });
+        teardown();
+    });
 
-            afterEach(function() {
-                server.restore();
-            });
+    t.test("should send data", function( st ) {
+        var data = "test data";
 
-            it("should call success on 200 response", function() {
-                var success = sinon.spy();
+        st.plan( 1 );
 
-                request({
-                    url: "/test",
-                    success: success
-                });
-
-                var xhr = server.requests[0];
-                xhr.respond(200, {}, "");
-                expect(success.calledWith("", 200)).to.be(true);
-            });
-
-            it("should call success on 304 response", function() {
-                var success = sinon.spy();
-
-                request({
-                    url: "/test",
-                    success: success
-                });
-
-                var xhr = server.requests[0];
-                xhr.respond(304, {}, "");
-                expect(success.calledWith("", 304)).to.be(true);
-            });
-
-            it("should call error on 400 response", function() {
-                var error = sinon.spy();
-
-                request({
-                    url: "/test",
-                    error: error
-                });
-
-                var xhr = server.requests[0];
-                xhr.respond(400, {}, "");
-                expect(error.calledWith("", 400)).to.be(true);
-            });
-
-            it("should call error on 500 response", function() {
-                var error = sinon.spy();
-
-                request({
-                    url: "/test",
-                    error: error
-                });
-
-                var xhr = server.requests[0];
-                xhr.respond(500, {}, "");
-                expect(error.calledWith("", 500)).to.be(true);
-            });
-
+        request({
+            method: "POST",
+            url: "/test",
+            data: data
         });
 
+        var xhr = server.requests[0];
+        st.equal(xhr.requestBody, data);
     });
 
 });
+
+test("response codes", function( t ) {
+    var server;
+
+    t.plan( 4 );
+
+    function setup() {
+        server = sinon.fakeServer.create();
+    }
+
+    function teardown() {
+        server.restore();
+    }
+
+    t.test("should call success on 200 response", function( st ) {
+        st.plan( 1 );
+
+        setup();
+
+        var success = sinon.spy();
+
+        request({
+            url: "/test",
+            success: success
+        });
+
+        var xhr = server.requests[0];
+        xhr.respond(200, {}, "");
+        st.ok(success.calledWith("", 200));
+
+        teardown();
+    });
+
+    t.test("should call success on 304 response", function( st ) {
+        setup();
+
+        st.plan( 1 );
+
+        var success = sinon.spy();
+
+        request({
+            url: "/test",
+            success: success
+        });
+
+        var xhr = server.requests[0];
+        xhr.respond(304, {}, "");
+        st.ok(success.calledWith("", 304));
+
+        teardown();
+    });
+
+    t.test("should call error on 400 response", function( st ) {
+        st.plan( 1 );
+
+        setup();
+
+        var error = sinon.spy();
+
+        request({
+            url: "/test",
+            error: error
+        });
+
+        var xhr = server.requests[0];
+        xhr.respond(400, {}, "");
+        st.ok(error.calledWith("", 400));
+
+        teardown();
+    });
+
+    t.test("should call error on 500 response", function( st ) {
+        st.plan( 1 );
+
+        setup();
+
+        var error = sinon.spy();
+
+        request({
+            url: "/test",
+            error: error
+        });
+
+        var xhr = server.requests[0];
+        xhr.respond(500, {}, "");
+        st.ok(error.calledWith("", 500));
+
+        teardown();
+    });
+
+});
+
+

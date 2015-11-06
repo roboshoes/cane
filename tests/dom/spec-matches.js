@@ -1,35 +1,38 @@
-define(["cane/dom/matches"], function(matches) {
+var test = require( "tape" );
+var matches = require( "../../source/dom/matches" );
 
-    describe("dom/matches", function() {
+test("should return true if node matches selector", function( t ) {
+    t.plan( 1 );
 
-        it("should return true if node matches selector", function() {
-            var node = document.createElement("div");
-            node.className = "test";
+    var node = document.createElement("div");
+    node.className = "test";
 
-            expect( matches("div.test", node) ).to.be(true);
-        });
+    t.equal( matches("div.test", node), true);
+});
 
-        it("should return false if node does not match selector", function() {
-            var node = document.createElement("div");
+test("should return false if node does not match selector", function( t ) {
+    t.plan( 1 );
 
-            expect( matches(".bar", node) ).to.be(false);
-        });
+    var node = document.createElement("div");
 
-        it("should return true if all nodes match", function() {
-            var first = document.createElement("div"),
-                second = document.createElement("div");
+    t.equal( matches(".bar", node), false);
+});
 
-            expect( matches("div", first, second) ).to.be(true);
-        });
+test("should return true if all nodes match", function( t ) {
+    t.plan( 1 );
 
-        it("should return false if any of the nodes do not match", function() {
-            var first = document.createElement("div"),
-                second = document.createElement("div");
-            first.className = "foo";
+    var first = document.createElement("div"),
+        second = document.createElement("div");
 
-            expect( matches(".foo", first, second) ).to.be(false);
-        });
+    t.equal( matches("div", first, second), true);
+});
 
-    });
+test("should return false if any of the nodes do not match", function( t ) {
+    t.plan( 1 );
 
+    var first = document.createElement("div"),
+        second = document.createElement("div");
+    first.className = "foo";
+
+    t.equal( matches(".foo", first, second), false);
 });

@@ -1,62 +1,66 @@
-define(["cane/events/removeListener"], function(removeListener) {
+var test = require( "tape" );
+var sinon = require( "sinon" );
+var removeListener = require( "../../source/events/removeListener" );
 
-    describe("events/removeListener", function() {
+test("should remove event listener", function( t ) {
+    t.plan( 1 );
 
-        it("should remove event listener", function() {
-            var el = document.createElement("div"),
-                event = document.createEvent("Event"),
-                callback = sinon.spy();
-            event.initEvent("test", true, true);
+    var el = document.createElement("div"),
+        event = document.createEvent("Event"),
+        callback = sinon.spy();
+    event.initEvent("test", true, true);
 
-            el.addEventListener("test", callback, false);
-            removeListener(el, "test", callback);
-            el.dispatchEvent(event);
+    el.addEventListener("test", callback, false);
+    removeListener(el, "test", callback);
+    el.dispatchEvent(event);
 
-            expect(callback.called).to.be(false);
-        });
+    t.notOk(callback.called);
+});
 
-        it("should remove event listener from multiple nodes", function() {
-            var first = document.createElement("div"),
-                second = document.createElement("div"),
-                event = document.createEvent("Event"),
-                callback = sinon.spy();
-            event.initEvent("test", true, true);
+test("should remove event listener from multiple nodes", function( t ) {
+    t.plan( 1 );
 
-            first.addEventListener("test", callback, false);
-            second.addEventListener("test", callback, false);
-            removeListener([first, second], "test", callback);
-            first.dispatchEvent(event);
-            second.dispatchEvent(event);
+    var first = document.createElement("div"),
+        second = document.createElement("div"),
+        event = document.createEvent("Event"),
+        callback = sinon.spy();
+    event.initEvent("test", true, true);
 
-            expect(callback.called).to.be(false);
-        });
+    first.addEventListener("test", callback, false);
+    second.addEventListener("test", callback, false);
+    removeListener([first, second], "test", callback);
+    first.dispatchEvent(event);
+    second.dispatchEvent(event);
 
-        it("should ignore if listener has not been added", function() {
-            var el = document.createElement("div"),
-                callback = sinon.spy();
+    t.notOk(callback.called);
+});
 
-            removeListener(el, "test", callback);
-        });
+test("should ignore if listener has not been added", function( t ) {
+    t.plan( 1 );
 
-        it("should remove listener from multiple events", function() {
-            var el = document.createElement("div"),
-                fooEvent = document.createEvent("Event"),
-                barEvent = document.createEvent("Event"),
-                callback = sinon.spy();
-            fooEvent.initEvent("foo", true, true);
-            barEvent.initEvent("bar", true, true);
+    var el = document.createElement("div"),
+        callback = sinon.spy();
 
-            el.addEventListener("foo", callback, false);
-            el.addEventListener("bar", callback, false);
+    t.doesNotThrow( function() {
+        removeListener(el, "test", callback);
+    } );
+});
 
-            removeListener(el, "foo bar", callback);
+test("should remove listener from multiple events", function( t ) {
+    var el = document.createElement("div"),
+        fooEvent = document.createEvent("Event"),
+        barEvent = document.createEvent("Event"),
+        callback = sinon.spy();
+    fooEvent.initEvent("foo", true, true);
+    barEvent.initEvent("bar", true, true);
 
-            el.dispatchEvent(fooEvent);
-            el.dispatchEvent(barEvent);
+    el.addEventListener("foo", callback, false);
+    el.addEventListener("bar", callback, false);
 
-            expect(callback.called).to.be(false);
-        });
+    removeListener(el, "foo bar", callback);
 
-    });
+    el.dispatchEvent(fooEvent);
+    el.dispatchEvent(barEvent);
 
+    t.notOk(callback.called);
 });

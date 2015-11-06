@@ -1,30 +1,34 @@
-define(["cane/net/getJSON"], function(getJSON) {
+var test = require( "tape" );
+var sinon = require( "sinon" );
+var getJSON = require( "../../source/net/getJSON" );
 
-    describe("net/getJSON", function() {
+test("should call success callback with JSON", function( t ) {
+    t.plan( 1 );
+    t.timeoutAfter( 10000 );
 
-        it("should call success callback with JSON", function(done) {
-            getJSON("base/tests/resources/test.json", function(data) {
-                expect(data).to.eql({ "foo": "bar", "test": [1, 2, 3], "boolean": false });
-                done();
-            });
-        });
+    getJSON("base/tests/resources/test.json", function(data) {
+        t.deepEqual(data, { "foo": "bar", "test": [1, 2, 3], "boolean": false });
+    });
+});
 
-        it("should call error callback when resource can't be loaded", function(done) {
-            var success = sinon.spy();
+test("should call error callback when resource can't be loaded", function( t ) {
+    t.plan( 1 );
+    t.timeoutAfter( 10000 );
 
-            getJSON("base/tests/resources/wrong.json", success, function() {
-                expect(success.called).to.be(false);
-                done();
-            });
-        });
+    var success = sinon.spy();
 
-        it("should call error callback when resource is not valid JSON", function(done) {
-            var success = sinon.spy();
+    getJSON("base/tests/resources/wrong.json", success, function() {
+        t.notOk(success.called);
+    });
+});
 
-            getJSON("base/tests/resources/invalid.json", success, function() {
-                expect(success.called).to.be(false);
-                done();
-            });
-        });
+test("should call error callback when resource is not valid JSON", function( t ) {
+    t.plan( 1 );
+    t.timeoutAfter( 10000 );
+
+    var success = sinon.spy();
+
+    getJSON("base/tests/resources/invalid.json", success, function() {
+        t.notOk(success.called);
     });
 });

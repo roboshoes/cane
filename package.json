@@ -1,58 +1,62 @@
 {
-    "name": "cane",
-    "version": "0.2.1",
-    "description": "Modular DOM library",
-    "contributors": [
-        {
-            "name": "Conrad Zimmerman",
-            "email": "me@conradz.com"
-        },
-        {
-            "name": "Mathias Paumgarten",
-            "email": "mail@mathias-paumgarten.com"
-        }
-    ],
-
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/MathiasPaumgarten/cane/"
+  "name": "cane",
+  "version": "0.2.1",
+  "description": "Modular DOM library",
+  "contributors": [
+    {
+      "name": "Conrad Zimmerman",
+      "email": "me@conradz.com"
     },
-
-    "bugs": {
-        "url": "https://github.com/MathiasPaumgarten/cane/issues"
-    },
-
-    "scripts": {
-        "start": "grunt",
-        "test": "grunt test"
-    },
-
-    "keywords": [
-        "dom",
-        "style",
-        "ajax",
-        "modular"
-    ],
-
-    "directories": {
-        "doc": "./docs"
-    },
-
-    "license": "MIT",
-
-    "dependencies": {
-        "mout": "~0.9.0"
-    },
-
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-jshint": "~0.5.3",
-        "grunt-karma": "~0.4.4",
-        "grunt-contrib-watch": "~0.4.3",
-        "grunt-cli": "~0.1.8",
-        "express": "~3.4.0",
-        "mdoc": "~0.3.4",
-        "sinon": "~1.7.3",
-        "expect.js": "~0.2.0"
+    {
+      "name": "Mathias Paumgarten",
+      "email": "mail@mathias-paumgarten.com"
     }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MathiasPaumgarten/cane/"
+  },
+  "bugs": {
+    "url": "https://github.com/MathiasPaumgarten/cane/issues"
+  },
+  "scripts": {
+    "start": "grunt",
+    "test": "grunt test"
+  },
+  "keywords": [
+    "dom",
+    "style",
+    "ajax",
+    "modular"
+  ],
+  "directories": {
+    "doc": "./docs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "mout": "~0.11.0"
+  },
+  "testling": {
+    "files": ["tests/**/*.js", "!tests/net/**/*.js"],
+    "browsers": [
+      "ie/9..latest",
+      "chrome/30..latest",
+      "firefox/30..latest",
+      "safari/latest",
+      "opera/11.0..latest",
+      "iphone/6",
+      "ipad/6",
+      "android-browser/latest"
+    ]
+  },
+  "devDependencies": {
+    "express": "~3.4.0",
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.8",
+    "grunt-contrib-jshint": "~0.5.3",
+    "grunt-contrib-watch": "~0.4.3",
+    "mdoc": "~0.3.4",
+    "sinon": "^1.17.2",
+    "tape": "^4.2.2"
+  }
 }

@@ -1,43 +1,43 @@
-define(["cane/style/css"], function(css) {
+var test = require( "tape" );
+var css = require( "../../source/style/css" );
 
-    describe("style/css()", function() {
+test("should add one style in key value format", function( t ) {
+    t.plan( 1 );
 
-        it("should add one style in key value format", function() {
-            var node = document.createElement("div");
-            css(node, "overflow", "hidden");
-            expect(node.style.overflow).to.be("hidden");
-        });
+    var node = document.createElement("div");
+    css(node, "overflow", "hidden");
 
-        it("should add multiple style settings passed as object", function() {
-            var node = document.createElement("div");
+    t.equal(node.style.overflow, "hidden");
+});
 
-            css(node, {
-                "overflow": "hidden",
-                "height": "30px",
-                "width": "20px",
-                "lineHeight": "20px"
-            });
+test("should add multiple style settings passed as object", function( t ) {
+    t.plan( 4 );
 
-            expect(node.style.overflow).to.be("hidden");
-            expect(node.style.height).to.be("30px");
-            expect(node.style.width).to.be("20px");
-            expect(node.style.lineHeight).to.be("20px");
-        });
+    var node = document.createElement("div");
 
-        it("should normalize style", function() {
-            var node = document.createElement("div");
-
-            css(node, "line-height", "20px");
-            css(node, {
-                fontSize: "10em",
-                "minWidth": "100px"
-            });
-
-            expect(node.style.lineHeight).to.be("20px");
-            expect(node.style.fontSize).to.be("10em");
-            expect(node.style.minWidth).to.be("100px");
-        });
-
+    css(node, {
+        "overflow": "hidden",
+        "height": "30px",
+        "width": "20px",
+        "lineHeight": "20px"
     });
 
+    t.equal(node.style.overflow, "hidden");
+    t.equal(node.style.height, "30px");
+    t.equal(node.style.width, "20px");
+    t.equal(node.style.lineHeight, "20px");
+});
+
+test("should normalize style", function( t ) {
+    var node = document.createElement("div");
+
+    css(node, "line-height", "20px");
+    css(node, {
+        fontSize: "10em",
+        "minWidth": "100px"
+    });
+
+    t.equal(node.style.lineHeight, "20px");
+    t.equal(node.style.fontSize, "10em");
+    t.equal(node.style.minWidth, "100px");
 });

@@ -1,33 +1,34 @@
-define(["cane/utils/isList"], function(isList) {
+var test = require( "tape" );
+var isList = require( "../../source/utils/isList" );
 
-    describe("utils/isList", function() {
+test("should return true for NodeList", function( t ) {
+    t.plan( 1 );
+    var list = document.getElementsByTagName("div");
+    t.ok(isList(list));
+});
 
-        it("should return true for NodeList", function() {
-            var list = document.getElementsByTagName("div");
-            expect(isList(list)).to.be(true);
-        });
+test("should return true for array", function( t ) {
+    t.plan( 1 );
+    t.ok(isList([]));
+});
 
-        it("should return true for array", function() {
-            expect(isList([])).to.be(true);
-        });
+test("should return true for arguments", function( t ) {
+    t.plan( 1 );
+    t.ok(isList(arguments));
+});
 
-        it("should return true for arguments", function() {
-            expect(isList(arguments)).to.be(true);
-        });
+test("should return false for Node", function( t ) {
+    t.plan( 1 );
+    var element = document.createElement("div");
+    t.notOk(isList(element));
+});
 
-        it("should return false for Node", function() {
-            var element = document.createElement("div");
-            expect(isList(element)).to.be(false);
-        });
+test("should return false for object", function( t ) {
+    t.plan( 1 );
+    t.notOk(isList({}));
+});
 
-        it("should return false for object", function() {
-            expect(isList({})).to.be(false);
-        });
-
-        it("should return false for null", function() {
-            expect(isList(null)).to.be(false);
-        });
-
-    });
-
+test("should return false for null", function( t ) {
+    t.plan( 1 );
+    t.notOk(isList(null));
 });

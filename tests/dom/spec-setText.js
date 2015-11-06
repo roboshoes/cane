@@ -1,23 +1,22 @@
-define(["cane/dom/setText"], function(setText) {
+var test = require( "tape" );
+var setText = require( "../../source/dom/setText" );
 
-    describe("dom/setText", function() {
+test("should set text content of one node", function( t ) {
+    t.plan( 1 );
+    var el = document.createElement("div");
 
-        it("should set text content of one node", function() {
-            var el = document.createElement("div");
+    setText(el, "foo bar");
 
-            setText(el, "foo bar");
+    t.equal(el.textContent, "foo bar");
+});
 
-            expect(el.textContent).to.be("foo bar");
-        });
+test("shold set text content of multiple nodes", function( t ) {
+    t.plan( 2 );
+    var first = document.createElement("div"),
+        second = document.createElement("div");
 
-        it("shold set text content of multiple nodes", function() {
-            var first = document.createElement("div"),
-                second = document.createElement("div");
+    setText([first, second], "foo");
 
-            setText([first, second], "foo");
-
-            expect(first.textContent).to.be("foo");
-            expect(second.textContent).to.be("foo");
-        });
-    });
+    t.equal(first.textContent, "foo");
+    t.equal(second.textContent, "foo");
 });

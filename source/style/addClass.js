@@ -18,5 +18,3 @@ function addClass(nodes, classes) {
 }
 
 module.exports = addClass;
-
-
