@@ -1,0 +1,19 @@
+{
+    "expr"      : true,
+    "camelcase" : true,
+    "curly"     : false,
+    "eqeqeq"    : true,
+    "immed"     : true,
+    "newcap"    : true,
+    "noarg"     : true,
+    "sub"       : true,
+    "undef"     : true,
+    "eqnull"    : true,
+    "browser"   : true,
+    "node"      : true,
+    "maxlen"    : 150,
+    "strict"    : false,
+    "globals"   : {
+        "console"   : true
+    }
+}
