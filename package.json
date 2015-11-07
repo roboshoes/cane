@@ -37,7 +37,7 @@
     "mout": "~0.11.0"
   },
   "testling": {
-    "files": ["tests/**/*.js", "!tests/net/**/*.js"],
+    "files": "tests/**/*.js",
     "browsers": [
       "ie/9..latest",
       "chrome/30..latest",
@@ -50,11 +50,7 @@
     ]
   },
   "devDependencies": {
-    "express": "~3.4.0",
-    "grunt": "~0.4.1",
-    "grunt-cli": "~0.1.8",
-    "grunt-contrib-jshint": "~0.5.3",
-    "grunt-contrib-watch": "~0.4.3",
+    "express": "~4.13.0",
     "mdoc": "~0.3.4",
     "sinon": "^1.17.2",
     "tape": "^4.2.2"
