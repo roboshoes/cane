@@ -47,6 +47,8 @@ test("should ignore if listener has not been added", function( t ) {
 });
 
 test("should remove listener from multiple events", function( t ) {
+    t.plan( 1 );
+
     var el = document.createElement("div"),
         fooEvent = document.createEvent("Event"),
         barEvent = document.createEvent("Event"),

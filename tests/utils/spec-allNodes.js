@@ -70,7 +70,7 @@ test("should recurse into nested lists", function( t ) {
 });
 
 test("should pass context to callback", function( t ) {
-    t.plan( 2 );
+    t.plan( 3 );
 
     var context = {},
         node = document.createElement("span"),

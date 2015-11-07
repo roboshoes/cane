@@ -7,7 +7,7 @@ test("should trigger completed and success", function( t ) {
     t.timeoutAfter( 10000 );
 
     request({
-        url: "base/tests/resources/test.txt",
+        url: "/resources/test.txt",
         completed: function(responseDate, status) {
             t.equal(responseDate, "Successfully loaded");
             t.equal(status, 200);
@@ -22,7 +22,7 @@ test("should trigger error", function( t ) {
     t.plan( 1 );
 
     request({
-        url: "base/tests/resources/wrong.txt",
+        url: "/resources/wrong.txt",
         error: function(responseData, status) {
             t.equal(status, 404);
         }
@@ -53,7 +53,7 @@ test("request methods and parameters", function(t) {
         });
 
         var xhr = server.requests[0];
-        st.eqaul(xhr.method, "POST");
+        st.equal(xhr.method, "POST");
         st.equal(xhr.url, "/test");
 
         teardown();
@@ -97,6 +97,8 @@ test("request methods and parameters", function(t) {
     });
 
     t.test("should send data", function( st ) {
+        setup();
+
         var data = "test data";
 
         st.plan( 1 );
@@ -109,6 +111,8 @@ test("request methods and parameters", function(t) {
 
         var xhr = server.requests[0];
         st.equal(xhr.requestBody, data);
+
+        teardown();
     });
 
 });

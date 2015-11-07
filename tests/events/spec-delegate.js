@@ -3,7 +3,7 @@ var sinon = require( "sinon" );
 var delegate = require( "../../source/events/delegate" );
 
 test("should listen for events on elements that match", function( t ) {
-    t.plan( 2 );
+    t.plan( 1 );
 
     var main = document.createElement("div"),
         child = document.createElement("span"),

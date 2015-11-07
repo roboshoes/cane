@@ -29,6 +29,8 @@ test("should add multiple style settings passed as object", function( t ) {
 });
 
 test("should normalize style", function( t ) {
+    t.plan( 3 );
+
     var node = document.createElement("div");
 
     css(node, "line-height", "20px");

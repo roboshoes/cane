@@ -2,7 +2,7 @@ var test = require( "tape" );
 var insertAt = require( "../../source/dom/insertAt" );
 
 test("should insert node at index", function( t ) {
-    t.plan( 3 );
+    t.plan( 1 );
 
     var parent = document.createElement("div"),
         first = document.createElement("span"),
@@ -20,7 +20,7 @@ test("should insert node at index", function( t ) {
 });
 
 test("should append if index is higher then children", function( t ) {
-    t.plan( 3 );
+    t.plan( 1 );
 
     var parent = document.createElement("div"),
         first = document.createElement("span"),
@@ -38,7 +38,7 @@ test("should append if index is higher then children", function( t ) {
 });
 
 test("should determin index from the end of array if index is negative", function( t ) {
-    t.plan( 3 );
+    t.plan( 6 );
 
     var parent = document.createElement("div"),
         first = document.createElement("span"),
@@ -72,7 +72,7 @@ test("should determin index from the end of array if index is negative", functio
 });
 
 test("should insert multiple nodes", function( t ) {
-    t.plan( 3 );
+    t.plan( 2 );
 
     var parent = document.createElement("div"),
         first = document.createElement("span"),

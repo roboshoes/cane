@@ -1,7 +1,7 @@
 var test = require( "tape" );
 var jsonp = require( "../../source/net/jsonp" );
 
-var url = window.location.protocol + "//" + window.location.hostname + ":9000/jsonp/";
+var url = "/jsonp/";
 var mirrorURL = url + "mirror";
 var staticURL = url + "static";
 
