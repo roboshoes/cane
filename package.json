@@ -20,8 +20,6 @@
     "url": "https://github.com/MathiasPaumgarten/cane/issues"
   },
   "scripts": {
-    "start": "grunt",
-    "test": "grunt test"
   },
   "keywords": [
     "dom",
@@ -51,6 +49,7 @@
   },
   "devDependencies": {
     "express": "~4.13.0",
+    "grunt": "^0.4.5",
     "mdoc": "~0.3.4",
     "sinon": "^1.17.2",
     "tape": "^4.2.2"

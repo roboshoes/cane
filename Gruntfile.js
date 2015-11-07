@@ -67,21 +67,6 @@ module.exports = function(grunt) {
             }
         },
 
-        karma: {
-            test: {
-                configFile: "karma.config.js",
-                singleRun: true,
-                browsers:
-                    (process.env.KARMA_BROWSERS || "Chrome,Firefox").split(",")
-            },
-
-            dev: {
-                configFile: "karma.config.js",
-                autoWatch: false, // Triggered by watch task
-                background: true
-            }
-        },
-
         watch: {
             source: {
                 files: ["source/**/*.js"],
@@ -95,7 +80,7 @@ module.exports = function(grunt) {
 
             tests: {
                 files: ["tests/**/*.js", "!tests/runner.js"],
-                tasks: ["jshint:tests", "karma:dev:run"]
+                tasks: ["jshint:tests"]
             },
 
             grunt: {
@@ -125,12 +110,10 @@ module.exports = function(grunt) {
     [
         "grunt-contrib-jshint",
         "grunt-contrib-watch",
-        "grunt-karma"
     ].forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask("default", ["server", "karma:dev", "watch"]);
     grunt.registerTask("docs", ["mdoc"]);
-    grunt.registerTask("test", ["jshint", "server", "karma:test"]);
+    grunt.registerTask("test", ["jshint"]);
 
     grunt.registerMultiTask("mdoc", function() {
         var opts = this.options(),
@@ -142,10 +125,6 @@ module.exports = function(grunt) {
 
             mdoc.run(opts);
         });
-    });
-
-    grunt.registerTask("server", function() {
-        require("./server/main");
     });
 
 };
