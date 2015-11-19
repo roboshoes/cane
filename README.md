@@ -3,7 +3,7 @@ CANE
 
 [![Build Status](https://travis-ci.org/MathiasPaumgarten/cane.svg?branch=master)](https://travis-ci.org/MathiasPaumgarten/cane)
 [![Dependencies Status](https://david-dm.org/MathiasPaumgarten/cane.svg)](https://david-dm.org/MathiasPaumgarten/cane)
-[![Coverage](https://coveralls.io/repos/MathiasPaumgarten/cane/badge.svg?branch=coverage&service=github)](https://coveralls.io/github/MathiasPaumgarten/cane)
+[![Coverage Status](https://coveralls.io/repos/MathiasPaumgarten/cane/badge.svg?branch=master&service=github)](https://coveralls.io/github/MathiasPaumgarten/cane?branch=master)
 
 A modular (CommonJS based) JavaScript DOM library.
 
