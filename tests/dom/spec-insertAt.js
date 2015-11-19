@@ -1,89 +1,92 @@
-define(["cane/dom/insertAt"], function(insertAt) {
+var test = require( "tape" );
+var insertAt = require( "../../source/dom/insertAt" );
 
-    describe("dom/insertAt", function() {
+test("should insert node at index", function( t ) {
+    t.plan( 1 );
 
-        it("should insert node at index", function() {
-            var parent = document.createElement("div"),
-                first = document.createElement("span"),
-                second = document.createElement("span"),
-                third = document.createElement("span"),
-                div = document.createElement("div");
+    var parent = document.createElement("div"),
+        first = document.createElement("span"),
+        second = document.createElement("span"),
+        third = document.createElement("span"),
+        div = document.createElement("div");
 
-            parent.appendChild(first);
-            parent.appendChild(second);
-            parent.appendChild(third);
+    parent.appendChild(first);
+    parent.appendChild(second);
+    parent.appendChild(third);
 
-            insertAt(parent, div, 1);
+    insertAt(parent, div, 1);
 
-            expect(parent.children[1]).to.be(div);
-        });
+    t.equal(parent.children[1], div);
+});
 
-        it("should append if index is higher then children", function() {
-            var parent = document.createElement("div"),
-                first = document.createElement("span"),
-                second = document.createElement("span"),
-                third = document.createElement("span"),
-                div = document.createElement("div");
+test("should append if index is higher then children", function( t ) {
+    t.plan( 1 );
 
-            parent.appendChild(first);
-            parent.appendChild(second);
-            parent.appendChild(third);
+    var parent = document.createElement("div"),
+        first = document.createElement("span"),
+        second = document.createElement("span"),
+        third = document.createElement("span"),
+        div = document.createElement("div");
 
-            insertAt(parent, div, 10);
+    parent.appendChild(first);
+    parent.appendChild(second);
+    parent.appendChild(third);
 
-            expect(parent.children[3]).to.be(div);
-        });
+    insertAt(parent, div, 10);
 
-        it("should determin index from the end of array if index is negative", function() {
-            var parent = document.createElement("div"),
-                first = document.createElement("span"),
-                second = document.createElement("span"),
-                third = document.createElement("span"),
-                foo = document.createElement("div");
+    t.equal(parent.children[3], div);
+});
+
+test("should determin index from the end of array if index is negative", function( t ) {
+    t.plan( 6 );
+
+    var parent = document.createElement("div"),
+        first = document.createElement("span"),
+        second = document.createElement("span"),
+        third = document.createElement("span"),
+        foo = document.createElement("div");
 
 
-            parent.appendChild(first);
-            parent.appendChild(second);
-            parent.appendChild(third);
+    parent.appendChild(first);
+    parent.appendChild(second);
+    parent.appendChild(third);
 
-            insertAt(parent, foo, -1);
+    insertAt(parent, foo, -1);
 
-            expect(parent.children[0]).to.be(first);
-            expect(parent.children[1]).to.be(second);
-            expect(parent.children[2]).to.be(foo);
-            expect(parent.children[3]).to.be(third);
+    t.equal(parent.children[0], first);
+    t.equal(parent.children[1], second);
+    t.equal(parent.children[2], foo);
+    t.equal(parent.children[3], third);
 
-            parent.removeChild(foo);
+    parent.removeChild(foo);
 
-            insertAt(parent, foo, -2);
+    insertAt(parent, foo, -2);
 
-            expect(parent.children[1]).to.be(foo);
+    t.equal(parent.children[1], foo);
 
-            parent.removeChild(foo);
+    parent.removeChild(foo);
 
-            insertAt(parent, foo, -7);
+    insertAt(parent, foo, -7);
 
-            expect(parent.children[0]).to.be(foo);
-        });
+    t.equal(parent.children[0], foo);
+});
 
-        it("should insert multiple nodes", function() {
-            var parent = document.createElement("div"),
-                first = document.createElement("span"),
-                second = document.createElement("span"),
-                third = document.createElement("span"),
-                foo = document.createElement("div"),
-                bar = document.createElement("div");
+test("should insert multiple nodes", function( t ) {
+    t.plan( 2 );
 
-            parent.appendChild(first);
-            parent.appendChild(second);
-            parent.appendChild(third);
+    var parent = document.createElement("div"),
+        first = document.createElement("span"),
+        second = document.createElement("span"),
+        third = document.createElement("span"),
+        foo = document.createElement("div"),
+        bar = document.createElement("div");
 
-            insertAt(parent, [foo, bar], 1);
+    parent.appendChild(first);
+    parent.appendChild(second);
+    parent.appendChild(third);
 
-            expect(parent.children[1]).to.be(foo);
-            expect(parent.children[2]).to.be(bar);
-        });
+    insertAt(parent, [foo, bar], 1);
 
-    });
-
+    t.equal(parent.children[1], foo);
+    t.equal(parent.children[2], bar);
 });

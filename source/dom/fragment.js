@@ -1,18 +1,15 @@
-define([
-    "../utils/allNodes"
-], function(allNodes) {
+var allNodes = require("../utils/allNodes");
 
-    function add(item) {
-        this.appendChild(item);
-    }
+function add(item) {
+    this.appendChild(item);
+}
 
-    function fragment() {
-        var node = document.createDocumentFragment();
-        allNodes(arguments, add, node);
+function fragment() {
+    var node = document.createDocumentFragment();
+    allNodes(arguments, add, node);
 
-        return node;
-    }
+    return node;
+}
 
-    return fragment;
+module.exports = fragment;
 
-});

@@ -1,58 +1,59 @@
 {
-    "name": "cane",
-    "version": "0.2.1",
-    "description": "Modular DOM library",
-    "contributors": [
-        {
-            "name": "Conrad Zimmerman",
-            "email": "me@conradz.com"
-        },
-        {
-            "name": "Mathias Paumgarten",
-            "email": "mail@mathias-paumgarten.com"
-        }
-    ],
-
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/MathiasPaumgarten/cane/"
+  "name": "cane",
+  "version": "1.0.0",
+  "description": "Modular DOM library",
+  "contributors": [
+    {
+      "name": "Conrad Zimmerman",
+      "email": "me@conradz.com"
     },
-
-    "bugs": {
-        "url": "https://github.com/MathiasPaumgarten/cane/issues"
-    },
-
-    "scripts": {
-        "start": "grunt",
-        "test": "grunt test"
-    },
-
-    "keywords": [
-        "dom",
-        "style",
-        "ajax",
-        "modular"
-    ],
-
-    "directories": {
-        "doc": "./docs"
-    },
-
-    "license": "MIT",
-
-    "dependencies": {
-        "mout": "~0.9.0"
-    },
-
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-jshint": "~0.5.3",
-        "grunt-karma": "~0.4.4",
-        "grunt-contrib-watch": "~0.4.3",
-        "grunt-cli": "~0.1.8",
-        "express": "~3.4.0",
-        "mdoc": "~0.3.4",
-        "sinon": "~1.7.3",
-        "expect.js": "~0.2.0"
+    {
+      "name": "Mathias Paumgarten",
+      "email": "mail@mathias-paumgarten.com"
     }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MathiasPaumgarten/cane/"
+  },
+  "bugs": {
+    "url": "https://github.com/MathiasPaumgarten/cane/issues"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "dom",
+    "style",
+    "ajax",
+    "events",
+    "modular"
+  ],
+  "directories": {
+    "doc": "./docs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "mout": "~0.11.1"
+  },
+  "devDependencies": {
+    "cors": "^2.7.1",
+    "express": "~4.13.0",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^4.0.1",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-karma": "^0.12.1",
+    "karma": "^0.13.15",
+    "karma-browserify": "^4.4.0",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-tap": "^1.0.3",
+    "mdoc": "~0.3.4",
+    "sinon": "^1.17.2",
+    "tape": "^4.2.2"
+  }
 }

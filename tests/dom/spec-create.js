@@ -1,73 +1,83 @@
-define(["cane/dom/create"], function(create) {
+var test = require( "tape" );
+var create = require( "../../source/dom/create" );
 
-    describe("dom/create", function() {
+test("should create element with tag name", function( t ) {
+    t.plan( 2 );
 
-        it("should create element with tag name", function() {
-            var el = create("div");
+    var el = create("div");
 
-            expect(el.nodeType).to.be(Node.ELEMENT_NODE);
-            expect(el.tagName).to.be("DIV");
-        });
-
-        it("should set attributes on element", function() {
-            var el = create("div", { "class": "test", "data-test": "value" });
-
-            expect(el.className).to.be("test");
-            expect(el.getAttribute("data-test")).to.be("value");
-        });
-
-        it("should add child nodes", function() {
-            var one = document.createElement("span"),
-                two = document.createElement("span"),
-                el = create("div", one, two);
-
-            var nodes = el.childNodes;
-            expect(nodes.length).to.be(2);
-            expect(nodes[0]).to.be(one);
-            expect(nodes[1]).to.be(two);
-        });
-
-        it("should add array of child nodes", function() {
-            var one = document.createElement("span"),
-                two = document.createElement("span"),
-                three = document.createElement("span"),
-                el = create("div", [one, two], three);
-
-            var nodes = el.childNodes;
-            expect(nodes.length).to.be(3);
-            expect(nodes[0]).to.be(one);
-            expect(nodes[1]).to.be(two);
-            expect(nodes[2]).to.be(three);
-        });
-
-        it("should set attributes and add child nodes", function() {
-            var one = document.createElement("span"),
-                two = document.createElement("span"),
-                el = create("div", { "class": "test" }, one, two);
-
-            expect(el.className).to.be("test");
-
-            var nodes = el.childNodes;
-            expect(nodes.length).to.be(2);
-            expect(nodes[0]).to.be(one);
-            expect(nodes[1]).to.be(two);
-        });
-
-        it("should set text", function() {
-            var text = "test <span>test</span>",
-                el = create("div", text);
-
-            expect(el.textContent).to.be(text);
-        });
-
-        it("should set attributes and text", function() {
-            var text = "test content",
-                el = create("div", { "class": "test" }, text);
-
-            expect(el.className).to.be("test");
-            expect(el.textContent).to.be(text);
-        });
-
-    });
-
+    t.equal(el.nodeType, Node.ELEMENT_NODE);
+    t.equal(el.tagName, "DIV");
 });
+
+test("should set attributes on element", function( t ) {
+    t.plan( 2 );
+
+    var el = create("div", { "class": "test", "data-test": "value" });
+
+    t.equal(el.className, "test");
+    t.equal(el.getAttribute("data-test"), "value");
+});
+
+test("should add child nodes", function( t ) {
+    t.plan( 3 );
+
+    var one = document.createElement("span"),
+        two = document.createElement("span"),
+        el = create("div", one, two);
+
+    var nodes = el.childNodes;
+    t.equal(nodes.length, 2);
+    t.equal(nodes[0], one);
+    t.equal(nodes[1], two);
+});
+
+test("should add array of child nodes", function( t ) {
+    t.plan( 4 );
+
+    var one = document.createElement("span"),
+        two = document.createElement("span"),
+        three = document.createElement("span"),
+        el = create("div", [one, two], three);
+
+    var nodes = el.childNodes;
+    t.equal(nodes.length, 3);
+    t.equal(nodes[0], one);
+    t.equal(nodes[1], two);
+    t.equal(nodes[2], three);
+});
+
+test("should set attributes and add child nodes", function( t ) {
+    t.plan( 4 );
+
+    var one = document.createElement("span"),
+        two = document.createElement("span"),
+        el = create("div", { "class": "test" }, one, two);
+
+    t.equal(el.className, "test");
+
+    var nodes = el.childNodes;
+    t.equal(nodes.length, 2);
+    t.equal(nodes[0], one);
+    t.equal(nodes[1], two);
+});
+
+test("should set text", function( t ) {
+    t.plan( 1 );
+
+    var text = "test <span>test</span>",
+        el = create("div", text);
+
+    t.equal(el.textContent, text);
+});
+
+test("should set attributes and text", function( t ) {
+    t.plan( 2 );
+
+    var text = "test content",
+        el = create("div", { "class": "test" }, text);
+
+    t.equal(el.className, "test");
+    t.equal(el.textContent, text);
+});
+

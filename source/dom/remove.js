@@ -1,18 +1,15 @@
-define([
-    "../utils/allNodes"
-], function(allNodes) {
+var allNodes = require("../utils/allNodes");
 
-    function removeNode(node) {
-        var parent = node.parentNode;
-        if (parent) {
-            parent.removeChild(node);
-        }
+function removeNode(node) {
+    var parent = node.parentNode;
+    if (parent) {
+        parent.removeChild(node);
     }
+}
 
-    function remove() {
-        allNodes(arguments, removeNode);
-    }
+function remove() {
+    allNodes(arguments, removeNode);
+}
 
-    return remove;
+module.exports = remove;
 
-});

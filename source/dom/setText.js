@@ -1,12 +1,10 @@
-define([
-	"../utils/allNodes"
-], function(allNodes) {
+var allNodes = require("../utils/allNodes");
 
-	function setText(nodes, text) {
-		allNodes(nodes, function(node) {
-			node.textContent = text;
-		});
-	}
+function setText(nodes, text) {
+    allNodes(nodes, function(node) {
+        node.textContent = text;
+    });
+}
 
-	return setText;
-});
+module.exports = setText;
+

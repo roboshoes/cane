@@ -1,40 +1,40 @@
-define(["cane/dom/empty"], function(empty) {
+var test = require( "tape" );
+var empty = require( "../../source/dom/empty" );
 
-    describe("dom/empty", function() {
+test("should empty a node", function( t ) {
 
-        it("should empty a node", function() {
+    t.plan( 1 );
 
-            var parent = document.createElement("div"),
-                first = document.createElement("span"),
-                second = document.createElement("span");
+    var parent = document.createElement("div"),
+        first = document.createElement("span"),
+        second = document.createElement("span");
 
-            parent.appendChild(first);
-            parent.appendChild(second);
+    parent.appendChild(first);
+    parent.appendChild(second);
 
-            empty(parent);
+    empty(parent);
 
-            expect(parent.childNodes.length).to.be(0);
+    t.equal(parent.childNodes.length, 0);
 
-        });
+});
 
-        it("should empty multiple nodes", function() {
+test("should empty multiple nodes", function( t ) {
+    t.plan( 2 );
 
-            var parentOne = document.createElement("div"),
-                parentTwo = document.createElement("div"),
-                first = document.createElement("span"),
-                second = document.createElement("span"),
-                third = document.createElement("span"),
-                forth = document.createElement("span");
+    var parentOne = document.createElement("div"),
+        parentTwo = document.createElement("div"),
+        first = document.createElement("span"),
+        second = document.createElement("span"),
+        third = document.createElement("span"),
+        forth = document.createElement("span");
 
-            parentOne.appendChild(first);
-            parentOne.appendChild(second);
-            parentTwo.appendChild(third);
-            parentTwo.appendChild(forth);
+    parentOne.appendChild(first);
+    parentOne.appendChild(second);
+    parentTwo.appendChild(third);
+    parentTwo.appendChild(forth);
 
-            empty(parentOne, parentTwo);
+    empty(parentOne, parentTwo);
 
-            expect(parentOne.childNodes.length).to.be(0);
-            expect(parentTwo.childNodes.length).to.be(0);
-        });
-    });
+    t.equal(parentOne.childNodes.length, 0);
+    t.equal(parentTwo.childNodes.length, 0);
 });

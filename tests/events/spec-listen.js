@@ -1,82 +1,88 @@
-define(["cane/events/listen"], function(listen) {
+var test = require( "tape" );
+var sinon = require( "sinon" );
+var listen = require( "../../source/events/listen" );
 
-    describe("events/listen", function() {
+test("should add event listener", function( t ) {
+    t.plan( 3 );
 
-        it("should add event listener", function() {
-            var el = document.createElement("div"),
-                callback = sinon.spy(),
-                event = document.createEvent("Event");
-            event.initEvent("test", true, true);
+    var el = document.createElement("div"),
+        callback = sinon.spy(),
+        event = document.createEvent("Event");
+    event.initEvent("test", true, true);
 
-            listen(el, "test", callback);
-            el.dispatchEvent(event);
+    listen(el, "test", callback);
+    el.dispatchEvent(event);
 
-            expect(callback.calledOnce).to.be(true);
-            expect(callback.calledWith(event)).to.be(true);
-            expect(callback.calledOn(el)).to.be(true);
-        });
+    t.ok(callback.calledOnce);
+    t.ok(callback.calledWith(event));
+    t.ok(callback.calledOn(el));
+});
 
-        it("should listen on multiple nodes", function() {
-            var first = document.createElement("div"),
-                second = document.createElement("div"),
-                callback = sinon.spy(),
-                event = document.createEvent("Event");
-            event.initEvent("test", true, true);
+test("should listen on multiple nodes", function( t ) {
+    t.plan( 4 );
 
-            listen([first, second], "test", callback);
+    var first = document.createElement("div"),
+        second = document.createElement("div"),
+        callback = sinon.spy(),
+        event = document.createEvent("Event");
+    event.initEvent("test", true, true);
 
-            first.dispatchEvent(event);
-            expect(callback.calledOnce).to.be(true);
-            expect(callback.calledOn(first)).to.be(true);
+    listen([first, second], "test", callback);
 
-            second.dispatchEvent(event);
-            expect(callback.calledTwice).to.be(true);
-            expect(callback.calledOn(first)).to.be(true);
-        });
+    first.dispatchEvent(event);
+    t.ok(callback.calledOnce);
+    t.ok(callback.calledOn(first));
 
-        it("should listen on multiple nodes", function() {
-            var el = document.createElement("div"),
-                fooEvent = document.createEvent("Event"),
-                barEvent = document.createEvent("Event"),
-                callback = sinon.spy();
-            fooEvent.initEvent("foo", true, true);
-            barEvent.initEvent("bar", true, true);
+    second.dispatchEvent(event);
+    t.ok(callback.calledTwice);
+    t.ok(callback.calledOn(first));
+});
 
-            listen(el, "foo bar", callback);
+test("should listen on multiple nodes", function( t ) {
+    t.plan( 2 );
 
-            el.dispatchEvent(fooEvent);
-            expect(callback.calledWith(fooEvent)).to.be(true);
+    var el = document.createElement("div"),
+        fooEvent = document.createEvent("Event"),
+        barEvent = document.createEvent("Event"),
+        callback = sinon.spy();
+    fooEvent.initEvent("foo", true, true);
+    barEvent.initEvent("bar", true, true);
 
-            el.dispatchEvent(barEvent);
-            expect(callback.calledWith(barEvent)).to.be(true);
-        });
+    listen(el, "foo bar", callback);
 
-        it("should return a remove function to remove listener", function() {
-            var el = document.createElement("div"),
-                event = document.createEvent("Event"),
-                callback = sinon.spy();
-            event.initEvent("test", true, true);
+    el.dispatchEvent(fooEvent);
+    t.ok(callback.calledWith(fooEvent));
 
-            var listener = listen(el, "test", callback);
-            listener.remove();
-            el.dispatchEvent(event);
+    el.dispatchEvent(barEvent);
+    t.ok(callback.calledWith(barEvent));
+});
 
-            expect(callback.called).to.be(false);
-        });
+test("should return a remove function to remove listener", function( t ) {
+    t.plan( 1 );
 
-        it("should call callback in context if specified", function() {
-            var context = { a: 1 },
-                el = document.createElement("div"),
-                event = document.createEvent("Event"),
-                callback = sinon.spy();
-            event.initEvent("test", true, true);
+    var el = document.createElement("div"),
+        event = document.createEvent("Event"),
+        callback = sinon.spy();
+    event.initEvent("test", true, true);
 
-            listen(el, "test", callback, context);
-            el.dispatchEvent(event);
+    var listener = listen(el, "test", callback);
+    listener.remove();
+    el.dispatchEvent(event);
 
-            expect(callback.calledOn(context)).to.be(true);
-        });
+    t.notOk(callback.called);
+});
 
-    });
+test("should call callback in context if specified", function( t ) {
+    t.plan( 1 );
 
+    var context = { a: 1 },
+        el = document.createElement("div"),
+        event = document.createEvent("Event"),
+        callback = sinon.spy();
+    event.initEvent("test", true, true);
+
+    listen(el, "test", callback, context);
+    el.dispatchEvent(event);
+
+    t.ok(callback.calledOn(context));
 });

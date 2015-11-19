@@ -1,20 +1,30 @@
-var express = require("express");
-var clone = require("mout/lang/clone");
+var express = require( "express" );
+var cors = require( "cors" );
+var clone = require( "mout/lang/clone" );
+
 var app = express();
 
-app.get("/jsonp/static", function(request, result) {
-	result.jsonp({
-		foo: "bar"
-	});
-});
+app.use( cors() );
 
-app.get("/jsonp/mirror", function(request, result) {
-	var params = clone(request.query);
+app.get( "/jsonp/static", function( request, response ) {
+	response.jsonp( {
+		foo: "bar"
+	} );
+} );
+
+app.get( "/jsonp/mirror", function( request, response ) {
+	var params = clone( request.query );
 	delete params.callback;
 
-	result.jsonp(params);
-});
+	response.jsonp( params );
+} );
 
-app.listen(9000);
+app.use( "/resources", express.static( "tests/resources" ) );
 
-module.exports = app;
+app.get( "/", function( request, response ) {
+    response.send( "<!DOCTYPE html><html><body><script src='bundle.js'></script></body></html>" );
+} );
+
+app.use( express.static( "tests" ) );
+
+app.listen( 9000 );

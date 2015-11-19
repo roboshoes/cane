@@ -1,35 +1,36 @@
-define(["cane/dom/fragment"], function(fragment) {
+var test = require( "tape" );
+var fragment = require( "../../source/dom/fragment" );
 
-    describe("dom/fragment", function() {
+test("should create empty DocumentFragment", function( t ) {
+    t.plan( 2 );
 
-        it("should create empty DocumentFragment", function() {
-            var f = fragment();
-            expect(f.nodeType).to.be(Node.DOCUMENT_FRAGMENT_NODE);
-            expect(f.childNodes.length).to.be(0);
-        });
+    var f = fragment();
+    t.equal(f.nodeType, Node.DOCUMENT_FRAGMENT_NODE);
+    t.equal(f.childNodes.length, 0);
+});
 
-        it("should add nodes", function() {
-            var first = document.createElement("div"),
-                second = document.createTextNode("Test"),
-                f = fragment(first, second);
+test("should add nodes", function( t ) {
+    t.plan( 3 );
 
-            expect(f.childNodes.length).to.be(2);
-            expect(f.firstChild).to.be(first);
-            expect(f.lastChild).to.be(second);
-        });
+    var first = document.createElement("div"),
+        second = document.createTextNode("Test"),
+        f = fragment(first, second);
 
-        it("should add nested arrays", function() {
-            var one = document.createElement("div"),
-                two = document.createElement("div"),
-                three = document.createElement("div"),
-                f = fragment(one, [two, [three]]);
+    t.equal(f.childNodes.length, 2);
+    t.equal(f.firstChild, first);
+    t.equal(f.lastChild, second);
+});
 
-            expect(f.childNodes.length).to.be(3);
-            expect(f.childNodes[0]).to.be(one);
-            expect(f.childNodes[1]).to.be(two);
-            expect(f.childNodes[2]).to.be(three);
-        });
+test("should add nested arrays", function( t ) {
+    t.plan( 4 );
 
-    });
+    var one = document.createElement("div"),
+        two = document.createElement("div"),
+        three = document.createElement("div"),
+        f = fragment(one, [two, [three]]);
 
+    t.equal(f.childNodes.length, 3);
+    t.equal(f.childNodes[0], one);
+    t.equal(f.childNodes[1], two);
+    t.equal(f.childNodes[2], three);
 });

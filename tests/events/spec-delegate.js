@@ -1,116 +1,129 @@
-define(["cane/events/delegate"], function(delegate) {
+var test = require( "tape" );
+var sinon = require( "sinon" );
+var delegate = require( "../../source/events/delegate" );
 
-    describe("events/delegate", function() {
+test("should listen for events on elements that match", function( t ) {
+    t.plan( 1 );
 
-        it("should listen for events on elements that match", function() {
-            var main = document.createElement("div"),
-                child = document.createElement("span"),
-                event = document.createEvent("Event"),
-                handler = sinon.spy();
+    var main = document.createElement("div"),
+        child = document.createElement("span"),
+        event = document.createEvent("Event"),
+        handler = sinon.spy();
 
-            delegate(main, ".child", "test", handler);
+    delegate(main, ".child", "test", handler);
 
-            event.initEvent("test", true, true);
-            child.className = "child";
-            main.appendChild(child);
-            // See https://code.google.com/p/chromium/issues/detail?id=120494
-            // Element must be attached to body in Chrome/Webkit
-            document.body.appendChild(main);
-            child.dispatchEvent(event);
-            document.body.removeChild(main);
+    event.initEvent("test", true, true);
+    child.className = "child";
+    main.appendChild(child);
+    // See https://code.google.com/p/chromium/issues/detail?id=120494
+    // Element must be attached to body in Chrome/Webkit
+    document.body.appendChild(main);
+    child.dispatchEvent(event);
+    document.body.removeChild(main);
 
-            expect(handler.calledOn(child)).to.be(true);
-        });
+    t.ok(handler.calledOn(child));
+});
 
-        it("should ignore events on elements that do not match", function() {
-            var main = document.createElement("div"),
-                child = document.createElement("span"),
-                event = document.createEvent("Event"),
-                handler = sinon.spy();
+test("should ignore events on elements that do not match", function( t ) {
+    t.plan( 1 );
 
-            delegate(main, ".ignore", "test", handler);
+    var main = document.createElement("div"),
+        child = document.createElement("span"),
+        event = document.createEvent("Event"),
+        handler = sinon.spy();
 
-            event.initEvent("test", true, true);
-            main.appendChild(child);
-            document.body.appendChild(main);
-            child.dispatchEvent(event);
-            document.body.removeChild(main);
+    delegate(main, ".ignore", "test", handler);
 
-            expect(handler.called).to.be(false);
-        });
+    event.initEvent("test", true, true);
+    main.appendChild(child);
+    document.body.appendChild(main);
+    child.dispatchEvent(event);
+    document.body.removeChild(main);
 
-        it("should ignore events on main element", function() {
-            var main = document.createElement("div"),
-                event = document.createEvent("Event"),
-                handler = sinon.spy();
+    t.notOk(handler.called);
+});
 
-            delegate(main, "div", "test", handler);
+test("should ignore events on main element", function( t ) {
+    t.plan( 1 );
 
-            event.initEvent("test", true, true);
-            document.body.appendChild(main);
-            main.dispatchEvent(event);
-            document.body.removeChild(main);
+    var main = document.createElement("div"),
+        event = document.createEvent("Event"),
+        handler = sinon.spy();
 
-            expect(handler.called).to.be(false);
-        });
+    delegate(main, "div", "test", handler);
 
-        it("should return an object with .remove function", function() {
-            var main = document.createElement("div"),
-                child = document.createElement("span"),
-                event = document.createEvent("Event"),
-                handler = sinon.spy();
+    event.initEvent("test", true, true);
+    document.body.appendChild(main);
+    main.dispatchEvent(event);
+    document.body.removeChild(main);
 
-            var listener = delegate(main, "span", "test", handler);
+    t.notOk(handler.called);
+});
 
-            event.initEvent("test", true, true);
-            main.appendChild(child);
-            document.body.appendChild(main);
-            child.dispatchEvent(event);
-            listener.remove();
-            child.dispatchEvent(event);
+test("should return an object with .remove function", function( t ) {
+    t.plan( 1 );
 
-            expect(handler.calledOnce).to.be(true);
-        });
+    var main = document.createElement("div"),
+        child = document.createElement("span"),
+        event = document.createEvent("Event"),
+        handler = sinon.spy();
 
-        it("should accept multiple elements", function() {
-            var main1 = document.createElement("div"),
-                main2 = document.createElement("div"),
-                child1 = document.createElement("span"),
-                child2 = document.createElement("span"),
-                event = document.createEvent("Event"),
-                handler = sinon.spy();
+    var listener = delegate(main, "span", "test", handler);
 
-            delegate([main1, main2], "span", "test", handler);
+    event.initEvent("test", true, true);
+    main.appendChild(child);
+    document.body.appendChild(main);
+    child.dispatchEvent(event);
+    listener.remove();
+    child.dispatchEvent(event);
+    document.body.removeChild(main);
+    t.ok(handler.calledOnce);
+});
 
-            event.initEvent("test", true, true);
-            main1.appendChild(child1);
-            main2.appendChild(child2);
-            document.body.appendChild(main1);
-            document.body.appendChild(main2);
+test("should accept multiple elements", function( t ) {
+    t.plan( 1 );
 
-            child1.dispatchEvent(event);
-            child2.dispatchEvent(event);
+    var main1 = document.createElement("div"),
+        main2 = document.createElement("div"),
+        child1 = document.createElement("span"),
+        child2 = document.createElement("span"),
+        event = document.createEvent("Event"),
+        handler = sinon.spy();
 
-            expect(handler.calledTwice).to.be(true);
-        });
+    delegate([main1, main2], "span", "test", handler);
 
-        it("should call callback in context if specified", function() {
-            var span = document.createElement("span"),
-                el = document.createElement("div"),
-                event = document.createEvent("Event"),
-                callback = sinon.spy(),
-                context = { foo: "bar" };
-            event.initEvent("test", true, true);
+    event.initEvent("test", true, true);
+    main1.appendChild(child1);
+    main2.appendChild(child2);
+    document.body.appendChild(main1);
+    document.body.appendChild(main2);
 
-            el.appendChild(span);
-            document.body.appendChild(el);
+    child1.dispatchEvent(event);
+    child2.dispatchEvent(event);
 
-            delegate(el, "span", "test", callback, context);
-            span.dispatchEvent(event);
+    document.body.removeChild( main1 );
+    document.body.removeChild( main2 );
 
-            expect(callback.calledOn(context)).to.be(true);
-        });
+    t.ok(handler.calledTwice);
+});
 
-    });
+test("should call callback in context if specified", function( t ) {
+    t.plan( 1 );
 
+    var span = document.createElement("span"),
+        el = document.createElement("div"),
+        event = document.createEvent("Event"),
+        callback = sinon.spy(),
+        context = { foo: "bar" };
+    event.initEvent("test", true, true);
+
+    el.appendChild(span);
+    document.body.appendChild(el);
+
+    delegate(el, "span", "test", callback, context);
+    span.dispatchEvent(event);
+
+    document.body.removeChild(el);
+
+    t.ok(callback.calledOn(context));
 });

@@ -1,6 +1,6 @@
-module.exports = function(grunt) {
+module.exports = function( grunt ) {
 
-    grunt.initConfig({
+    grunt.initConfig( {
         jshint: {
             options: {
                 camelcase: true,
@@ -14,98 +14,49 @@ module.exports = function(grunt) {
                 undef: true,
                 unused: true,
                 trailing: true,
-                maxlen: 80,
-                quotmark: "double"
+                maxlen: 120,
+                quotmark: "double",
+                node: true,
+                browser: true
             },
 
-            source: {
-                options: {
-                    browser: true,
-                    globals: { require: false, define: false }
-                },
+            all: {
                 files: {
-                    src: ["source/**/*.js"]
+                    src: [
+                        "source/**/*.js",
+                        "server/**/*.js",
+                        "tests/**/*.js",
+                        "karma.config.js",
+                        "Gruntfile.js"
+                    ]
                 }
-            },
-
-            server: {
-                options: {
-                    node: true
-                },
-                files: {
-                    src: ["server/**/*.js"]
-                }
-            },
-
-            tests: {
-                options: {
-                    browser: true,
-                    maxlen: 120,
-                    globals: {
-                        require: false,
-                        define: false,
-                        expect: false,
-                        describe: false,
-                        it: false,
-                        beforeEach: false,
-                        afterEach: false,
-                        sinon: false
-                    }
-                },
-                files: {
-                    src: ["tests/**/*.js", "karma.config.js"]
-                }
-            },
-
-            grunt: {
-                options: {
-                    node: true
-                },
-                files: {
-                    src: ["Gruntfile.js"]
-                }
-            }
-        },
-
-        karma: {
-            test: {
-                configFile: "karma.config.js",
-                singleRun: true,
-                browsers:
-                    (process.env.KARMA_BROWSERS || "Chrome,Firefox").split(",")
-            },
-
-            dev: {
-                configFile: "karma.config.js",
-                autoWatch: false, // Triggered by watch task
-                background: true
             }
         },
 
         watch: {
             source: {
-                files: ["source/**/*.js"],
-                tasks: ["jshint:source", "karma:dev:run"]
+                files: [ "source/**/*.js" ],
+                tasks: [ "jshint", "karma:dev:run" ]
             },
 
             server: {
-                files: ["server/**/*.js"],
-                tasks: ["jshint:server"]
+                files: [ "server/**/*.js" ],
+                tasks: [ "jshint" ]
             },
 
             tests: {
-                files: ["tests/**/*.js", "!tests/runner.js"],
-                tasks: ["jshint:tests", "karma:dev:run"]
+                files: [ "tests/**/*.js" ],
+                tasks: [ "jshint" ]
             },
 
             grunt: {
-                files: ["Gruntfile.js"],
-                tasks: ["jshint:grunt"]
+                files: [ "Gruntfile.js" ],
+                tasks: [ "jshint" ]
             },
 
             docs: {
-                files: ["docs/**/*.md"],
-                tasks: ["docs"]
+                files: [ "docs/**/*.md" ],
+                tasks: [ "docs" ]
             }
         },
 
@@ -119,8 +70,16 @@ module.exports = function(grunt) {
                     "docs_html": "docs"
                 }
             }
+        },
+
+        karma: {
+            test: {
+                configFile: "karma.conf.js",
+                singleRun: true,
+                browsers: ( process.env.KARMA_BROWSERS || "Chrome,PhantomJS" ).split( "," )
+            }
         }
-    });
+    } );
 
     [
         "grunt-contrib-jshint",
@@ -128,13 +87,16 @@ module.exports = function(grunt) {
         "grunt-karma"
     ].forEach(grunt.loadNpmTasks);
 
-    grunt.registerTask("default", ["server", "karma:dev", "watch"]);
-    grunt.registerTask("docs", ["mdoc"]);
-    grunt.registerTask("test", ["jshint", "server", "karma:test"]);
+    grunt.registerTask( "docs", [ "mdoc" ] );
+    grunt.registerTask( "test", [ "jshint", "server", "karma" ] );
 
-    grunt.registerMultiTask("mdoc", function() {
+    grunt.registerTask( "server", function() {
+        require( "./server/main" );
+    } );
+
+    grunt.registerMultiTask( "mdoc", function() {
         var opts = this.options(),
-            mdoc = require("mdoc");
+            mdoc = require( "mdoc" );
 
         this.files.forEach(function(file) {
             opts.inputDir = file.src[0];
@@ -142,10 +104,6 @@ module.exports = function(grunt) {
 
             mdoc.run(opts);
         });
-    });
-
-    grunt.registerTask("server", function() {
-        require("./server/main");
     });
 
 };

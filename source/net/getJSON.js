@@ -1,30 +1,28 @@
-define([
-    "../net/request"
-], function(request) {
+var request = require("../net/request");
 
-    function noop() {}
+function noop() {}
 
-    function getJSON(url, success, error) {
+function getJSON(url, success, error) {
 
-        error = error || noop;
+    error = error || noop;
 
-        function parse(data, status) {
-            try {
-                success.call(this, JSON.parse(data));
-            } catch (exception) {
-                error.call(this, exception, data, status);
-            }
+    function parse(data, status) {
+        try {
+            success.call(this, JSON.parse(data));
+        } catch (exception) {
+            error.call(this, exception, data, status);
         }
-
-        request({
-            url: url,
-            headers: {
-                "Accept": "application/json, text/javascript"
-            },
-            success: parse,
-            error: error
-        });
     }
 
-    return getJSON;
-});
+    request({
+        url: url,
+        headers: {
+            "Accept": "application/json, text/javascript"
+        },
+        success: parse,
+        error: error
+    });
+}
+
+module.exports = getJSON;
+
