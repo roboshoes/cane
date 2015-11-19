@@ -88,6 +88,11 @@ module.exports = function( grunt ) {
     ].forEach(grunt.loadNpmTasks);
 
     grunt.registerTask( "docs", [ "mdoc" ] );
+    grunt.registerTask( "test", [ "jshint", "server", "karma" ] );
+
+    grunt.registerTask( "server", function() {
+        require( "./server/main" );
+    } );
 
     grunt.registerMultiTask( "mdoc", function() {
         var opts = this.options(),

@@ -20,7 +20,7 @@
     "url": "https://github.com/MathiasPaumgarten/cane/issues"
   },
   "scripts": {
-    "test": "grunt karma"
+    "test": "grunt test"
   },
   "keywords": [
     "dom",
