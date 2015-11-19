@@ -76,7 +76,17 @@ module.exports = function( grunt ) {
             test: {
                 configFile: "karma.conf.js",
                 singleRun: true,
-                browsers: ( process.env.KARMA_BROWSERS || "Chrome,PhantomJS" ).split( "," )
+                browsers: ( process.env.KARMA_BROWSERS || "Chrome,PhantomJS,Firefox" ).split( "," )
+            }
+        },
+
+        coveralls: {
+            options: {
+                debug: false,
+                coverageDir: "coverage",
+                dryRun: false,
+                force: true,
+                recursive: true
             }
         }
     } );
@@ -84,11 +94,12 @@ module.exports = function( grunt ) {
     [
         "grunt-contrib-jshint",
         "grunt-contrib-watch",
+        "grunt-karma-coveralls",
         "grunt-karma"
     ].forEach(grunt.loadNpmTasks);
 
     grunt.registerTask( "docs", [ "mdoc" ] );
-    grunt.registerTask( "test", [ "jshint", "server", "karma" ] );
+    grunt.registerTask( "test", [ "jshint", "server", "karma", "coveralls" ] );
 
     grunt.registerTask( "server", function() {
         require( "./server/main" );

@@ -37,6 +37,7 @@
     "mout": "~0.11.1"
   },
   "devDependencies": {
+    "browserify-istanbul": "^0.2.1",
     "cors": "^2.7.1",
     "express": "~4.13.0",
     "grunt": "^0.4.5",
@@ -45,6 +46,7 @@
     "grunt-contrib-jshint": "^0.11.3",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-karma": "^0.12.1",
+    "grunt-karma-coveralls": "^2.5.4",
     "karma": "^0.13.15",
     "karma-browserify": "^4.4.0",
     "karma-chrome-launcher": "^0.2.1",

@@ -1,3 +1,5 @@
+var istanbul = require( "browserify-istanbul" );
+
 module.exports = function( config ) {
     config.set( {
         plugins: [
@@ -18,7 +20,10 @@ module.exports = function( config ) {
         },
 
         browserify: {
-            debug: true
+            debug: true,
+            transform: [ istanbul( {
+                ignore: [ "node_modules/**", "tests/**" ]
+            } ) ]
         },
 
         reporters: [
@@ -27,7 +32,7 @@ module.exports = function( config ) {
         ],
 
         coverageReporter: {
-            type: "text",
+            type: "lcov",
             dir: "coverage/"
         },
 
