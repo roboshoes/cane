@@ -1,7 +1,7 @@
 CANE
 ====
 
-[![Build Status](https://travis-ci.org/MathiasPaumgarten/cane.png?branch=master)](https://travis-ci.org/MathiasPaumgarten/cane)
+[![Build Status](https://travis-ci.org/MathiasPaumgarten/cane.svg?branch=master)](https://travis-ci.org/MathiasPaumgarten/cane)
 [![Dependencies Status](https://david-dm.org/MathiasPaumgarten/cane.svg)](https://david-dm.org/MathiasPaumgarten/cane)
 
 A modular (CommonJS based) JavaScript DOM library.
