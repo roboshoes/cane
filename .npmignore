@@ -1,0 +1,25 @@
+# random files
+
+.tmp*
+.project
+.settings/
+.livereload
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+
+
+# stuff not needed by node
+
+node_modules/
+tests/
+doc_html/
+coverage/
+source/
+server/
+
+bower.json
+.travis.yml
+Gruntfile.js
+karma.conf.js

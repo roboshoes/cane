@@ -1,3 +1,5 @@
+var fs = require( "fs" );
+
 module.exports = function( grunt ) {
 
     grunt.initConfig( {
@@ -88,18 +90,30 @@ module.exports = function( grunt ) {
                 force: true,
                 recursive: true
             }
+        },
+
+        copy: {
+            npm: {
+                files: [
+                    { expand: true, cwd: "source", src: [ "**" ], dest: "./",  }
+                ]
+            }
+        },
+
+        clean: fs.readdirSync( "source" ),
+
+        shell: {
+            npm: {
+                command: "npm publish"
+            }
         }
     } );
 
-    [
-        "grunt-contrib-jshint",
-        "grunt-contrib-watch",
-        "grunt-karma-coveralls",
-        "grunt-karma"
-    ].forEach(grunt.loadNpmTasks);
+    require( "load-grunt-tasks" )( grunt );
 
     grunt.registerTask( "docs", [ "mdoc" ] );
     grunt.registerTask( "test", [ "jshint", "server", "karma", "coveralls" ] );
+    grunt.registerTask( "publish", [ "copy", "shell", "clean" ] );
 
     grunt.registerTask( "server", function() {
         require( "./server/main" );
