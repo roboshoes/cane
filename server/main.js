@@ -1,7 +1,10 @@
 var express = require( "express" );
+var cors = require( "cors" );
 var clone = require( "mout/lang/clone" );
 
 var app = express();
+
+app.use( cors() );
 
 app.get( "/jsonp/static", function( request, response ) {
 	response.jsonp( {
@@ -14,39 +17,14 @@ app.get( "/jsonp/mirror", function( request, response ) {
 	delete params.callback;
 
 	response.jsonp( params );
-});
-
-app.get( "/resources/:name", function( request, response ) {
-
-    var options = {
-        root: __dirname + "/../tests/resources",
-        dotfiles: "deny",
-        headers: {
-            "x-timestamp": Date.now(),
-            "x-sent": true
-        }
-    };
-
-    var fileName = request.params.name;
-
-    response.sendFile( fileName, options, function( error ) {
-
-        if ( error ) {
-            response.status( error.status ).end();
-        }
-
-    } );
 } );
+
+app.use( "/resources", express.static( "tests/resources" ) );
 
 app.get( "/", function( request, response ) {
-    response.send( "<!DOCTYPE html><html><body><script type='text/javascript' src='bundle.js'></script></body></html>" );
+    response.send( "<!DOCTYPE html><html><body><script src='bundle.js'></script></body></html>" );
 } );
 
-app.get( "/bundle.js", function( request, response ) {
-    response.sendFile( __dirname + "/bundle.js" );
-} );
+app.use( express.static( "tests" ) );
 
 app.listen( 9000 );
-
-module.exports = app;
-

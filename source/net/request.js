@@ -28,6 +28,7 @@ function request(options) {
     var xhr = new window.XMLHttpRequest();
 
     xhr.onreadystatechange = function() {
+
         if (xhr.readyState >= 4) {
             var success = isSuccess(xhr.status),
                 callback = success ? options.success : options.error;

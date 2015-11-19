@@ -76,7 +76,7 @@ test("should return an object with .remove function", function( t ) {
     child.dispatchEvent(event);
     listener.remove();
     child.dispatchEvent(event);
-
+    document.body.removeChild(main);
     t.ok(handler.calledOnce);
 });
 
@@ -101,6 +101,9 @@ test("should accept multiple elements", function( t ) {
     child1.dispatchEvent(event);
     child2.dispatchEvent(event);
 
+    document.body.removeChild( main1 );
+    document.body.removeChild( main2 );
+
     t.ok(handler.calledTwice);
 });
 
@@ -119,6 +122,8 @@ test("should call callback in context if specified", function( t ) {
 
     delegate(el, "span", "test", callback, context);
     span.dispatchEvent(event);
+
+    document.body.removeChild(el);
 
     t.ok(callback.calledOn(context));
 });

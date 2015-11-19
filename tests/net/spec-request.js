@@ -2,12 +2,14 @@ var test = require( "tape" );
 var sinon = require( "sinon" );
 var request = require( "../../source/net/request" );
 
+var url = "http://localhost:9000";
+
 test("should trigger completed and success", function( t ) {
     t.plan( 3 );
     t.timeoutAfter( 10000 );
 
     request({
-        url: "/resources/test.txt",
+        url: url + "/resources/test.txt",
         completed: function(responseDate, status) {
             t.equal(responseDate, "Successfully loaded");
             t.equal(status, 200);
@@ -22,7 +24,7 @@ test("should trigger error", function( t ) {
     t.plan( 1 );
 
     request({
-        url: "/resources/wrong.txt",
+        url: url + "/resources/wrong.txt",
         error: function(responseData, status) {
             t.equal(status, 404);
         }

@@ -16,6 +16,6 @@
 		"CONTRIBUTING.md"
 	],
 	"dependencies": {
-		"mout":"~0.9.0"
+		"mout":"~0.11.1"
 	}
 }

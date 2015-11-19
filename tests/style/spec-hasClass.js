@@ -39,4 +39,7 @@ test("should check on multiple elements", function( t ) {
 
     t.ok( hasClass(nodes, "two three") );
     t.notOk( hasClass(nodes, "two five") );
+
+    body.removeChild(node1);
+    body.removeChild(node2);
 });
