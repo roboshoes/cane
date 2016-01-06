@@ -7,11 +7,15 @@ function getJSON(url, success, error) {
     error = error || noop;
 
     function parse(data, status) {
+        var json;
+
         try {
-            success.call(this, JSON.parse(data));
+            json = JSON.parse(data);
         } catch (exception) {
             error.call(this, exception, data, status);
         }
+
+        success.call(this, json);
     }
 
     request({
