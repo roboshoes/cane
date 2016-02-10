@@ -22,11 +22,11 @@ Docs
 
 Browser the different packages in the docs folder
 
-[dom](https://github.com/MathiasPaumgarten/cane/blob/master/docs/dom.md): Helpers for various DOM manipulation.
-[events](https://github.com/MathiasPaumgarten/cane/blob/master/docs/events.md): Helpers for DOM event related business.
-[net](https://github.com/MathiasPaumgarten/cane/blob/master/docs/net.md): Helpers for all sorts of AJAX requests.
-[style](https://github.com/MathiasPaumgarten/cane/blob/master/docs/style.md): CSS and style related shenanigans.
-[utils](https://github.com/MathiasPaumgarten/cane/blob/master/docs/utils.md): Mostly internal tools, that might just be handy elsewhere.
+* [dom](https://github.com/MathiasPaumgarten/cane/blob/master/docs/dom.md): _Helpers for various DOM manipulation._
+* [events](https://github.com/MathiasPaumgarten/cane/blob/master/docs/events.md): _Helpers for DOM event related business._
+* [net](https://github.com/MathiasPaumgarten/cane/blob/master/docs/net.md): _Helpers for all sorts of AJAX requests._
+* [style](https://github.com/MathiasPaumgarten/cane/blob/master/docs/style.md): _CSS and style related shenanigans._
+* [utils](https://github.com/MathiasPaumgarten/cane/blob/master/docs/utils.md): _Mostly internal tools, that might just be handy elsewhere._
 
 
 Goals
