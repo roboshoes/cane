@@ -34,3 +34,25 @@ test("should add nested arrays", function( t ) {
     t.equal(f.childNodes[1], two);
     t.equal(f.childNodes[2], three);
 });
+
+test("should create fragment from string", function( t ) {
+    t.plan( 6 );
+
+    var html =
+        "<div>" +
+            "<span id='some-id'>foo</span>" +
+            "<span id='other-id'>foo</span>" +
+        "</div>" +
+        "some text" +
+        "<h1 class='' data-attribute='data'>Title</h1>";
+
+    var f = fragment.fromString(html);
+
+    t.equal(f.childNodes.length, 3);
+    t.equal(f.childNodes[0].nodeType, 1);
+    t.equal(f.childNodes[0].firstChild.innerHTML, "foo");
+    t.equal(f.childNodes[0].firstChild.getAttribute("id"), "some-id");
+    t.equal(f.childNodes[0].childNodes.length, 2);
+    t.equal(f.childNodes[1].nodeType, 3);
+
+});
