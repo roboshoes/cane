@@ -99,6 +99,20 @@ var element = document.createElement("div");
 var f = fragment(element);
 ```
 
+Additionally a fragment can also be created from a valid HTML string.
+
+```js
+var html =
+    "<div>" +
+        "<span id='some-id'>foo</span>" +
+        "<span id='other-id'>foo</span>" +
+    "</div>" +
+    "some text" +
+    "<h1 class='' data-attribute='data'>Title</h1>";
+
+var f = fragment.fromString(html);
+```
+
 
 ## insertAt(parent, nodes, index)
 

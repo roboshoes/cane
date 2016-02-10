@@ -13,8 +13,20 @@ What
 ----
 
 A completely modular collection of dom and ajax based utils for the browser,
-writting in node-style commonJS. This allows minifiers to pull only necessery
+written in node-style commonJS. This allows minifiers to pull only necessery
 code while giving the developer a variety of handy tools.
+
+
+Docs
+----
+
+Browser the different packages in the docs folder
+
+[dom](https://github.com/MathiasPaumgarten/cane/blob/master/docs/dom.md): Helpers for various DOM manipulation.
+[events](https://github.com/MathiasPaumgarten/cane/blob/master/docs/events.md): Helpers for DOM event related business.
+[net](https://github.com/MathiasPaumgarten/cane/blob/master/docs/net.md): Helpers for all sorts of AJAX requests.
+[style](https://github.com/MathiasPaumgarten/cane/blob/master/docs/style.md): CSS and style related shenanigans.
+[utils](https://github.com/MathiasPaumgarten/cane/blob/master/docs/utils.md): Mostly internal tools, that might just be handy elsewhere.
 
 
 Goals
