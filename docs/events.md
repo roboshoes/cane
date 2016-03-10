@@ -36,6 +36,14 @@ delegate(container, "button.action", "click", function() {
 
 See also: [`listen`](#listen)
 
+## dispatch(element, eventName):Object
+
+Dispatches an Event of `eventName` type to all the elements passed in.
+
+Example:
+```js
+dispatch( div, "click" );
+```
 
 ## listen(nodes, eventNames, callback, [context]):Object
 
