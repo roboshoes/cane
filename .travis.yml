@@ -1,6 +1,7 @@
 language: node_js
 node_js:
     - "4.0"
+    - "6.0"
 before_script:
     - export KARMA_BROWSERS='PhantomJS,Firefox'
     - export DISPLAY=:99.0
